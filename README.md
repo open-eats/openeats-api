@@ -1,18 +1,25 @@
-# OpenEats Project
+# OpenEats API
 
-[![Build Status](https://travis-ci.org/RyanNoelk/OpenEats.svg?branch=master)](https://travis-ci.org/RyanNoelk/OpenEats)
+[![API Build Status](https://travis-ci.org/open-eats/openeats-api.svg?branch=master)](https://travis-ci.org/open-eats/openeats-api)
 
-OpenEats is a recipe management site that allows users to create, share, and store their personal collection of recipes. This fork uses Django Rest Framework as a backend and React (with flux) as a front end.
+This is the API that powers OpenEats. It uses Django/Django Rest Framework to power the API. The core resposbailities of the APi are:
+- OpenEats REST API
+- Django User management with Django REST token auth
+- Django Admin panel for creating new users and administration
+- Static Media Manangemtn (AKA Recipe Images)
 
-The usage for the app is intended for a single user or a small group. For my personal use, I would be an admin user and a few (about 5-6) friends and family would be normal users. Admin users can add other users to the project (no open sign-ups), make changes to the available Cuisines and Courses, and add to the homepage banner. Normal users just have the ability to add recipes. Below are a few of the core features the app provides.
+See [the homepage](https://github.com/open-eats/OpenEats) for more information about setting you own OpenEats!
 
-- Creating, viewing, and editing recipes.
-- Browsing and searching for recipes.
-- Creating grocery lists
-- Quickly print recipe.
-- Linking recipes and ingredient grouping
+# Contributing
+Please read the [contribution guidelines](https://github.com/RyanNoelk/OpenEats/blob/master/CONTRIBUTING.md) in order to make the contribution process easy and effective for everyone involved.
 
-### [Read the docs on getting started here!](https://github.com/RyanNoelk/OpenEats/blob/master/docs/Running_the_App.md)
+
+
+# OpenEats Nginx Proxy Server
+
+This proxy server is meant as a way to easily link and serve the API and web app. Based on your environment file configuration, it will automatically bind the ports for the API and web app as well.
+
+See [the homepage](https://github.com/open-eats/OpenEats) for more information about setting you own OpenEats!
 
 # Contributing
 Please read the [contribution guidelines](https://github.com/RyanNoelk/OpenEats/blob/master/CONTRIBUTING.md) in order to make the contribution process easy and effective for everyone involved.
