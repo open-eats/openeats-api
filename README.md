@@ -8,7 +8,7 @@ This is the API that powers OpenEats. It uses Django/Django Rest Framework to po
 - Django Admin panel for creating new users and administration
 - Static Media Manangemtn (AKA Recipe Images)
 
-See [the homepage](https://github.com/open-eats/OpenEats) for more information about setting your own OpenEats!
+See [the homepage](https://github.com/open-eats/OpenEats) for more information about OpenEats!
 
 # Contributing
 Please read the [contribution guidelines](https://github.com/open-eats/openeats-api/blob/master/CONTRIBUTING.md) in order to make the contribution process easy and effective for everyone involved.
