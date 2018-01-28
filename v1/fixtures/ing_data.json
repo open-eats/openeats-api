@@ -1,0 +1,148 @@
+[
+    {
+        "pk": 1,
+        "model": "ingredient.IngredientGroup",
+        "fields": {
+            "recipe": 1,
+            "title": "Veges"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "ingredient.IngredientGroup",
+        "fields": {
+            "recipe": 1,
+            "title": "Beef"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "ingredient.ingredient",
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1,
+            "measurement": "dash",
+            "title": "black pepper"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 4, 
+            "measurement": "tablespoons", 
+            "title": "chili powder"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "tablespoon", 
+            "title": "cumin"
+        }
+    }, 
+    {
+        "pk": 4,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "can", 
+            "title": "dark kidney beans"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 2, 
+            "measurement": "cans", 
+            "title": "diced tomatos"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "whole", 
+            "title": "green bell pepper"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 2,
+            "quantity": 1, 
+            "measurement": "pound", 
+            "title": "ground pork"
+        }
+    }, 
+    {
+        "pk": 8,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 2,
+            "quantity": 1, 
+            "measurement": "pound", 
+            "title": "ground sirloin"
+        }
+    }, 
+    {
+        "pk": 9,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 2,
+            "quantity": 1, 
+            "measurement": "dash", 
+            "title": "kosher salt"
+        }
+    }, 
+    {
+        "pk": 10,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "can", 
+            "title": "light kidney beans"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "whole", 
+            "title": "serrano pepper "
+        }
+    },
+    {
+        "pk": 12,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "quart", 
+            "title": "tomato juice"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "ingredient.ingredient", 
+        "fields": {
+            "ingredient_group": 1,
+            "quantity": 1, 
+            "measurement": "whole", 
+            "title": "white onion"
+        }
+    }
+]

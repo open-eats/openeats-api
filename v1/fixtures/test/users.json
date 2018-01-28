@@ -1,0 +1,22 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user",
+        "fields": {
+            "username": "testuser1",
+            "password": "pbkdf2_sha256$30000$t5kcIso05oaI$Q3h8sDjgAHnGsxJ5f5wjNXuIgGNyophu82citSIs12I=",
+            "email": "test1@example.com",
+            "is_active": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.user",
+        "fields": {
+            "username": "testuser2",
+            "password": "pbkdf2_sha256$30000$t5kcIso05oaI$Q3h8sDjgAHnGsxJ5f5wjNXuIgGNyophu82citSIs12I=",
+            "email": "test2@example.com",
+            "is_active": 1
+        }
+    }
+]

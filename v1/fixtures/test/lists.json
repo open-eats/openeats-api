@@ -1,0 +1,22 @@
+[
+   {
+      "model":"list.grocerylist",
+      "pk":8,
+      "fields":{
+         "title":"test list",
+         "slug":"test-list",
+         "author":1,
+         "pub_date":"2017-02-25T00:39:43.034+00:00"
+      }
+   },
+   {
+      "model":"list.grocerylist",
+      "pk":9,
+      "fields":{
+         "title":"another test list",
+         "slug":"another-test-list",
+         "author":1,
+         "pub_date":"2017-02-25T00:40:05.919+00:00"
+      }
+   }
+]

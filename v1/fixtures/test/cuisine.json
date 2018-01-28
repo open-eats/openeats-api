@@ -1,0 +1,35 @@
+[
+    {
+        "pk": 1,
+        "model": "recipe_groups.cuisine",
+        "fields": {
+            "title": "Cuisine 1",
+            "slug": "cuisine-1",
+            "author": "1"
+        }
+    },{
+        "pk": 2,
+        "model": "recipe_groups.cuisine",
+        "fields": {
+            "title": "Cuisine 2",
+            "slug": "cuisine-2",
+            "author": "1"
+        }
+    },{
+        "pk": 3,
+        "model": "recipe_groups.cuisine",
+        "fields": {
+            "title": "Cuisine 3",
+            "slug": "cuisine-3",
+            "author": "1"
+        }
+    },{
+        "pk": 4,
+        "model": "recipe_groups.cuisine",
+        "fields": {
+            "title": "Cuisine 4",
+            "slug": "cuisine-4",
+            "author": "1"
+        }
+    }
+]

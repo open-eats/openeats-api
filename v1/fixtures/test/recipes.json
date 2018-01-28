@@ -1,0 +1,110 @@
+[
+    {
+        "pk": 1,
+        "model": "recipe.recipe",
+        "fields": {
+            "title": "Recipe 1",
+            "slug": "recipe-1",
+            "author": "1",
+            "cuisine": "1",
+            "course": "1",
+            "info": "Recipe info",
+            "prep_time": "1",
+            "cook_time": "1",
+            "servings": "1",
+            "rating": 0,
+            "pub_date": "2017-01-01 00:00:00+00:00",
+            "update_date": "2017-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "recipe.recipe",
+        "fields": {
+            "title": "Recipe 2",
+            "slug": "recipe-2",
+            "author": "1",
+            "cuisine": "1",
+            "course": "2",
+            "info": "Recipe info",
+            "prep_time": "1",
+            "cook_time": "1",
+            "servings": "1",
+            "rating": 0,
+            "pub_date": "2017-01-01 00:00:00+00:00",
+            "update_date": "2017-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "recipe.recipe",
+        "fields": {
+            "title": "Recipe 3",
+            "slug": "recipe-3",
+            "author": "1",
+            "cuisine": "2",
+            "course": "1",
+            "info": "Recipe info",
+            "prep_time": "1",
+            "cook_time": "1",
+            "servings": "1",
+            "rating": 1,
+            "pub_date": "2017-01-01 00:00:00+00:00",
+            "update_date": "2017-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "recipe.recipe",
+        "fields": {
+            "title": "Recipe 4",
+            "slug": "recipe-4",
+            "author": "1",
+            "cuisine": "1",
+            "course": "3",
+            "info": "Recipe info",
+            "prep_time": "1",
+            "cook_time": "1",
+            "servings": "1",
+            "rating": 1,
+            "pub_date": "2017-01-01 00:00:00+00:00",
+            "update_date": "2017-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "recipe.recipe",
+        "fields": {
+            "title": "Recipe 5",
+            "slug": "recipe-5",
+            "author": "1",
+            "cuisine": "2",
+            "course": "2",
+            "info": "Recipe info",
+            "prep_time": "1",
+            "cook_time": "1",
+            "servings": "1",
+            "rating": 2,
+            "pub_date": "2017-01-01 00:00:00+00:00",
+            "update_date": "2017-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "recipe.recipe",
+        "fields": {
+            "title": "Recipe 6",
+            "slug": "recipe-6",
+            "author": "1",
+            "cuisine": "3",
+            "course": "1",
+            "info": "Recipe info",
+            "prep_time": "1",
+            "cook_time": "1",
+            "servings": "1",
+            "rating": 2,
+            "pub_date": "2017-01-01 00:00:00+00:00",
+            "update_date": "2017-01-01 00:00:00+00:00"
+        }
+    }
+]

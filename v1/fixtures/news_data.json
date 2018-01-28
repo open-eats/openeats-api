@@ -1,0 +1,14 @@
+[
+    {
+        "pk": 1, 
+        "model": "news.news",
+        "fields": {
+        	"content": "OpenEats2 is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more. If you want to run your own personal OpenEats site visit the <a href=\"https://github.com/ryannoelk/OpenEats\" target=\"_blank\">Github page</a>",
+        	"image": "", 
+        	"pub_date": "2010-10-10 13:32:47", 
+        	"slug": "default-news-entry",
+        	"title": "OpenEats 2",
+            "frontpage": 1
+        }
+    }
+]

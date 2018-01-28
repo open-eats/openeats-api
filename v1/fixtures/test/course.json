@@ -1,0 +1,35 @@
+[
+    {
+        "pk": 1,
+        "model": "recipe_groups.course",
+        "fields": {
+            "title": "Course 1",
+            "slug": "course-1",
+            "author": "1"
+        }
+    },{
+        "pk": 2,
+        "model": "recipe_groups.course",
+        "fields": {
+            "title": "Course 2",
+            "slug": "course-2",
+            "author": "1"
+        }
+    },{
+        "pk": 3,
+        "model": "recipe_groups.course",
+        "fields": {
+            "title": "Course 3",
+            "slug": "course-3",
+            "author": "1"
+        }
+    },{
+        "pk": 4,
+        "model": "recipe_groups.course",
+        "fields": {
+            "title": "Course 4",
+            "slug": "course-4",
+            "author": "1"
+        }
+    }
+]
