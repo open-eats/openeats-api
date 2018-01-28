@@ -16,4 +16,3 @@ before_install:
 
 script:
 - docker-compose -f docker-compose-test.yml -p test run --rm --entrypoint 'sh tests.sh' api
-- docker-compose -f docker-compose-test.yml -p test run --rm --entrypoint 'npm test' node

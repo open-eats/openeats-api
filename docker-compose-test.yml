@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  api:
+    command: sh tests.sh
+    build: .
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SECERT_KEY=sdfsadfas32e98zsdvhhsnz6udvbksjdhfi4galshjfg
+      - DJANGO_SETTINGS_MODULE=base.settings
+      - MYSQL_DATABASE=test_openeats
+      - MYSQL_TEST_DATABASE=test_openeats
+      - MYSQL_ROOT_PASSWORD=root
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_DATABASE=test_openeats
+      - MYSQL_TEST_DATABASE=test_openeats
+      - MYSQL_ROOT_PASSWORD=root
