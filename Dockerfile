@@ -1,5 +1,22 @@
-FROM python:3.6
+FROM python:3.6-alpine
 ENV PYTHONUNBUFFERED 1
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+    bash \
+    gcc \
+    git \
+    openssh \
+    mariadb \
+    mysql-client \
+    py-mysqldb \
+    mariadb-dev \
+    py-pip \
+    gcc \
+    musl-dev \
+    libjpeg-turbo-dev \
+    python-dev \
+    zlib-dev
 
 COPY base/prod-entrypoint.sh /startup/
 RUN chmod +x /startup/prod-entrypoint.sh
