@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -16,7 +15,7 @@ class IngredientGroup(models.Model):
     :title: = Title of the Ingredient Group (EX: Cheddar Biscuits)
     """
     title = models.CharField(_('title'), max_length=150, null=True, blank=True)
-    recipe = models.ForeignKey(Recipe, verbose_name=_('recipe'), related_name='ingredient_groups')
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredient_groups')
 
     class Meta:
         ordering = ['id']
@@ -38,7 +37,7 @@ class Ingredient(models.Model):
     title = models.CharField(_('title'), max_length=250)
     quantity = models.FloatField(_('quantity'), default=0)
     measurement = models.CharField(_('measurement'), max_length=200, blank=True, null=True)
-    ingredient_group = models.ForeignKey(IngredientGroup, verbose_name=_('IngredientGroup'), related_name='ingredients', null=True)
+    ingredient_group = models.ForeignKey(IngredientGroup, on_delete=models.CASCADE, related_name='ingredients', null=True)
  
     class Meta:
         ordering = ['id']

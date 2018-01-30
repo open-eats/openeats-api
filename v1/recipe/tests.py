@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
-from copy import deepcopy
+
 import unittest
 import mock
+from copy import deepcopy
 
-from django.test import TestCase
 from v1.recipe.serializers import RecipeSerializer
 from v1.recipe.models import Recipe
 

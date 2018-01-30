@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
-from django.db.models import Q
 from django.db.models import Count
+from rest_framework import permissions
+from rest_framework import viewsets
+
 from v1.recipe_groups.models import Cuisine, Course, Tag
 from v1.recipe.models import Recipe
 from v1.recipe_groups import serializers
-from rest_framework import permissions
-from rest_framework import viewsets
 from v1.common.permissions import IsOwnerOrReadOnly
 from v1.common.recipe_search import get_search_results
 

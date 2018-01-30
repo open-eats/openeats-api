@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from rest_framework import serializers
 from rest_framework.serializers import ImageField
 from rest_framework.settings import api_settings
 from rest_framework.fields import SerializerMethodField
-
 
 from v1.recipe.models import Recipe, SubRecipe
 from v1.recipe_groups.models import Tag

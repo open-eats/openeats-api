@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 import operator
 from functools import reduce
@@ -11,7 +10,7 @@ def get_search_results(search_fields, queryset, search_term):
     """
     This code mirrors the search functionality that the django admin pages uses.
     It also happens to match what django rest users for there search implementation.
-    https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#django.contrib.admin.ModelAdmin.search_fields
+    https://docs.djangoproject.com/en/2.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.search_fields
     
     Usage: Returns a queryset to implement the search.
     Example:

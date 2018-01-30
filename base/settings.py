@@ -16,7 +16,7 @@ PROJECT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'ChangeMe!')
 
 # Force Django to use https headers if its behind a https proxy.
-# See: https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
+# See: https://docs.djangoproject.com/en/2.0/ref/settings/#secure-proxy-ssl-header
 if os.environ.get('HTTP_X_FORWARDED_PROTO', 'False').lower() == 'true':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -38,8 +38,9 @@ DATABASES = {
         }
     }
 }
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.10/ref/settings/#allowed-hosts
+# See https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'node']
 
 env_allowed_host = os.environ.get('ALLOWED_HOST', None)
@@ -78,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -98,6 +99,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'graphene_django',
+    'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
     'coreapi',
@@ -123,7 +125,7 @@ GRAPHENE = {
 }
 
 # Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#password-validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -152,7 +154,7 @@ LANGUAGE_CODE = 'en-us'
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%B %-d, %Y",
-    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication'

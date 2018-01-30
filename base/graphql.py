@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from django.conf import settings
 from graphene import ObjectType, Field, Schema

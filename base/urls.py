@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
@@ -34,19 +33,21 @@ admin.autodiscover()
 
 urlpatterns = [
     # Backend REST API
-    url(r'^api/v1/', include('v1.urls', namespace='v1')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/v1/', include('v1.urls', namespace='v1')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # GraphQL
-    url(r'^graphql', csrf_exempt(DRFAuthenticatedGraphQLView.as_view())),
+    path('graphql/', csrf_exempt(DRFAuthenticatedGraphQLView.as_view())),
 
     # Generic Static Home
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
 
     # Admin
-    url(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += [url(r'^graphiql/', csrf_exempt(GraphQLView.as_view(graphiql=True)))]
+    urlpatterns += [
+        path('graphiql/', csrf_exempt(GraphQLView.as_view(graphiql=True)))
+    ]

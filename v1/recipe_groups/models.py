@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -18,7 +17,7 @@ class Cuisine(models.Model):
     """
     title = models.CharField(_('title'), max_length=100, unique=True)
     slug = AutoSlugField(_('slug'), populate_from='title', unique=True)
-    author = models.ForeignKey(User, verbose_name=_('author'))
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['title']
@@ -37,7 +36,7 @@ class Course(models.Model):
     """
     title = models.CharField(_('title'), max_length=100, unique=True)
     slug = AutoSlugField(_('slug'), populate_from='title', unique=True)
-    author = models.ForeignKey(User, verbose_name=_('author'))
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['title']

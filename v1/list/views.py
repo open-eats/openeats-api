@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
-from rest_framework import permissions, filters, viewsets, status
+
+from rest_framework import filters, viewsets, status
 from rest_framework.response import Response
 from rest_framework_bulk import ListBulkCreateUpdateDestroyAPIView
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import GroceryList, GroceryItem
 from .serializers import GroceryListSerializer, \
@@ -34,7 +35,7 @@ class GroceryItemViewSet(viewsets.ModelViewSet):
     """
     serializer_class = GroceryItemSerializer
     permission_classes = (IsItemOwner,)
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter)
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend)
     filter_fields = ('list',)
 
     def get_queryset(self):

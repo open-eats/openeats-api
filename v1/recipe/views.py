@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 import uuid
 import tempfile
 import requests
+import random
 from django.core import files
 from django.db.models import Count
-from v1.recipe_groups.models import Cuisine, Course
 from rest_framework import permissions, viewsets, filters
 from rest_framework.response import Response
-import random
+
 from . import serializers
 from .models import Recipe
-from v1.common.permissions import IsOwnerOrReadOnly
+from v1.recipe_groups.models import Cuisine, Course
 from v1.common.recipe_search import get_search_results
 
 
@@ -24,7 +23,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     """
     serializer_class = serializers.RecipeSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('title', 'tags__title', 'ingredient_groups__ingredients__title')
     ordering_fields = ('pub_date', 'title', 'rating', )
 
@@ -98,13 +97,13 @@ class MiniBrowseViewSet(viewsets.mixins.ListModelMixin,
 
         # Get the limit from the request and the count from the DB.
         # Compare to make sure you aren't accessing more than possible.
-        limit = int(request.query_params.get('limit'))
+        limit = int(request.query_params.get('limit', 4))
         count = qs.count()
         if limit > count:
             limit = count
 
         # Get all ids from the DB.
-        my_ids = qs.values_list('id', flat=True)
+        my_ids = [key.id for key in qs]
         # Select a random sample from the DB.
         rand_ids = random.sample(my_ids, limit)
         # set the queryset to that random sample.

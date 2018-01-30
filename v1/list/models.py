@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
+
 from v1.recipe.models import Recipe
 
 
@@ -20,7 +20,7 @@ class GroceryList(models.Model):
     """
     title = models.CharField(_("grocery list title"), max_length=250)
     slug = AutoSlugField(_('slug'), populate_from='title')
-    author = models.ForeignKey(User, verbose_name=_('user'))
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -42,7 +42,7 @@ class GroceryItem(models.Model):
     completed = Whether or not the GroceryItem has been purchased or
                 added to the users shopping cart in the supermarket.
     """
-    list = models.ForeignKey(GroceryList, verbose_name=_('grocery_list'), related_name='items')
+    list = models.ForeignKey(GroceryList, on_delete=models.CASCADE, related_name='items')
     title = models.CharField(_("title"), max_length=550)
     completed = models.BooleanField(_("completed"), default=False)
 
@@ -61,9 +61,9 @@ class GroceryShared(models.Model):
     shared_by = The User that shared the List.
     shared_to = The User that is given access to a GroceryList.
     """
-    list = models.ForeignKey(GroceryList, verbose_name=_('grocery list'))
-    shared_by = models.ForeignKey(User, verbose_name=_('shared by'), related_name="shared_by")
-    shared_to = models.ForeignKey(User, verbose_name=_('shared to'), related_name="shared_to")
+    list = models.ForeignKey(GroceryList, on_delete=models.CASCADE)
+    shared_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shared_by")
+    shared_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shared_to")
 
     def __unicode__(self):
         return '%s' % self.list.title
@@ -75,8 +75,8 @@ class GroceryRecipe(models.Model):
     list = The GroceryList has holds the Recipe.
     recipe = The Recipe that is on a GroceryList.
     """
-    list = models.ForeignKey(GroceryList, verbose_name=_('grocery list'))
-    recipe = models.ForeignKey(Recipe, verbose_name=_('recipe'))
+    list = models.ForeignKey(GroceryList, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return '%s' % self.recipe.title

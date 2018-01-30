@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
+
 from django.test import TestCase
 from django.contrib.auth.models import User, AnonymousUser
 from rest_framework.test import APIRequestFactory
+
 from v1.list import views
 
 

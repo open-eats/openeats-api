@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
-from django.conf.urls import include, url
+from django.urls import include, path
 
+app_name='v1'
 urlpatterns = [
-    url(r'^accounts/', include('v1.accounts.urls')),
-    url(r'^recipe_groups/', include('v1.recipe_groups.urls')),
-    url(r'^ingredient/', include('v1.ingredient.urls')),
-    url(r'^list/', include('v1.list.urls')),
-    url(r'^news/', include('v1.news.urls')),
-    url(r'^recipe/', include('v1.recipe.urls')),
+    path('accounts/', include('v1.accounts.urls')),
+    path('recipe_groups/', include('v1.recipe_groups.urls')),
+    path('ingredient/', include('v1.ingredient.urls')),
+    path('list/', include('v1.list.urls')),
+    path('news/', include('v1.news.urls')),
+    path('recipe/', include('v1.recipe.urls')),
 ]

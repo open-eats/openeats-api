@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from rest_framework import renderers, viewsets
 from rest_framework.decorators import detail_route

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from rest_framework import permissions, viewsets
-from rest_framework import filters
 
 from .models import Ingredient, IngredientGroup
 from .serializers import IngredientSerializer, IngredientGroupSerializer
@@ -17,9 +15,10 @@ class IngredientGroupViewSet(viewsets.ModelViewSet):
     """
     queryset = IngredientGroup.objects.all()
     serializer_class = IngredientGroupSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    filter_backends = (filters.DjangoFilterBackend,)
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    )
     filter_fields = ('recipe',)
 
 
@@ -30,7 +29,8 @@ class IngredientViewSet(viewsets.ModelViewSet):
     """
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    filter_backends = (filters.DjangoFilterBackend,)
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    )
     filter_fields = ('ingredient_group', 'ingredient_group__recipe')

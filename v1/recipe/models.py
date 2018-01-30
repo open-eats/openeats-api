@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -38,14 +37,14 @@ class Recipe(models.Model):
     """
     title = models.CharField(_("Recipe Title"), max_length=250)
     slug = AutoSlugField(_('slug'), populate_from='title', unique=True)
-    author = models.ForeignKey(User, verbose_name=_('user'), null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     photo = models.ImageField(_('photo'), blank=True, upload_to="upload/recipe_photos")
     photo_thumbnail = ImageSpecField(source='photo',
                                      processors=[ResizeToFill(300, 200)],
                                      format='JPEG',
                                      options={'quality': 70})
-    cuisine = models.ForeignKey(Cuisine, verbose_name=_('cuisine'))
-    course = models.ForeignKey(Course, verbose_name=_('course'))
+    cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, verbose_name=_('tag'), blank=True)
     subrecipes = models.ManyToManyField('self', verbose_name=_('subrecipes'), through='SubRecipe', symmetrical=False)
     info = models.TextField(_('info'), help_text="enter information about the recipe", blank=True)
@@ -69,8 +68,8 @@ class Recipe(models.Model):
 class SubRecipe(models.Model):
     quantity = models.IntegerField(_('quantity'), blank=True, null=True)
     measurement = models.TextField(_('measurement'), blank=True, null=True)
-    child_recipe = models.ForeignKey("Recipe", verbose_name=_('subrecipe'), related_name='child_recipe', null=True)
-    parent_recipe = models.ForeignKey("Recipe", verbose_name=_('parent_recipe'), related_name='parent_recipe', null=True)
+    child_recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE, related_name='child_recipe', null=True)
+    parent_recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE, related_name='parent_recipe', null=True)
 
     def __unicode__(self):
         return '%s' % self.parent_recipe.title
