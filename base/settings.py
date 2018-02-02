@@ -116,14 +116,6 @@ INSTALLED_APPS = (
     'corsheaders'
 )
 
-# Where your Graphene schema lives
-GRAPHENE = {
-    'SCHEMA': 'base.graphql.schema',
-    'MIDDLEWARE': (
-        'graphene_django.debug.DjangoDebugMiddleware',
-    )
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#password-validation
 AUTH_PASSWORD_VALIDATORS = [

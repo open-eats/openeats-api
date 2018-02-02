@@ -15,7 +15,3 @@ Pillow==2.7.0
 mysqlclient==1.3.12
 mock==2.0.0
 pytz==2016.10
-
-# graphene-django==1.3
-git+https://github.com/graphql-python/graphene-django.git@2929d0866c800ae6efa8d35bb40548940a70c31f
-graphene==1.4.1
