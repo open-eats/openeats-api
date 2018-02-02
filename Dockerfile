@@ -7,9 +7,8 @@ RUN apk update && apk upgrade && \
     git \
     openssh \
     mariadb \
-    mysql-client \
-    py-mysqldb \
     mariadb-dev \
+    py-mysqldb \
     musl-dev \
     libjpeg-turbo-dev \
     zlib-dev
