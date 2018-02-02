@@ -98,7 +98,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.staticfiles',
 
-    'graphene_django',
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
