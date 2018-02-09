@@ -41,11 +41,14 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'node']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'node', 'web']
 
 env_allowed_host = os.environ.get('ALLOWED_HOST', None)
 if env_allowed_host is not None:
-    ALLOWED_HOSTS.append(env_allowed_host)
+    if ',' in env_allowed_host:
+        ALLOWED_HOSTS += [host.strip() for host in env_allowed_host.split(',')]
+    else:
+        ALLOWED_HOSTS.append(env_allowed_host)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATES = [
