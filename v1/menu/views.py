@@ -5,32 +5,25 @@ from rest_framework import permissions, viewsets
 
 from .models import MenuItem, Menu
 from .serializers import MenuItemSerializer, MenuSerializer
-from v1.common.permissions import IsOwnerOrReadOnly
+from .permissions import IsMenuOwner, IsMenuItemOwner
+
+class MenuViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions for Menus.
+    """
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    permission_classes = (IsMenuOwner,)
+    filter_fields = ('start_date', 'end_date', 'author')
 
 
 class MenuItemViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for Ingredients.
+    `update` and `destroy` actions for Menu Items.
     """
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-        # IsOwnerOrReadOnly
-    )
-    # filter_fields = ('recipe',)
-
-
-class MenuViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions for Ingredients.
-    """
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-        # IsOwnerOrReadOnly
-    )
-    # filter_fields = ('ingredient_group', 'ingredient_group__recipe')
+    permission_classes = (IsMenuItemOwner,)
+    filter_fields = ('menu', 'recipe', 'occurrence', 'date')

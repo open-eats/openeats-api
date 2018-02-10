@@ -17,7 +17,7 @@ class Menu(models.Model):
     """
     title = models.CharField(_('title'), max_length=150, null=True, blank=True)
     description = models.CharField(_('description'), max_length=150, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()

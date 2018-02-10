@@ -4,10 +4,11 @@
 from rest_framework import serializers
 from rest_framework.fields import CharField
 
+from v1.recipe.mixins import FieldLimiter
 from .models import Menu, MenuItem
 
 
-class MenuItemSerializer(serializers.ModelSerializer):
+class MenuItemSerializer(FieldLimiter, serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     recipe_title = CharField(source='recipe.title', read_only=True)
 
@@ -23,7 +24,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
         ]
 
 
-class MenuSerializer(serializers.ModelSerializer):
+class MenuSerializer(FieldLimiter, serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     menu = MenuItemSerializer(many=True, read_only=True)
 
@@ -33,7 +34,7 @@ class MenuSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
-            'user',
+            'author',
             'start_date',
             'end_date',
             'pub_date',
