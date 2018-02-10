@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets
 
 from .models import MenuItem, Menu
 from .serializers import MenuItemSerializer, MenuSerializer
 from .permissions import IsMenuOwner, IsMenuItemOwner
+
 
 class MenuViewSet(viewsets.ModelViewSet):
     """
