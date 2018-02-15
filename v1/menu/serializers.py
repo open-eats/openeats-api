@@ -20,7 +20,8 @@ class MenuItemSerializer(FieldLimiter, serializers.ModelSerializer):
             'menu',
             'recipe',
             'occurrence',
-            'date',
+            'start_date',
+            'end_date',
         ]
 
 
