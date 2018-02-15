@@ -148,7 +148,7 @@ USE_TZ = True
 LANGUAGE_CODE = 'en-us'
 
 REST_FRAMEWORK = {
-    'DATETIME_FORMAT': "%B %-d, %Y",
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
