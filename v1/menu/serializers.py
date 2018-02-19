@@ -35,10 +35,6 @@ class MenuSerializer(FieldLimiter, serializers.ModelSerializer):
             'title',
             'description',
             'author',
-            'start_date',
-            'end_date',
-            'pub_date',
             'menu',
-            'update_date'
         ]
 

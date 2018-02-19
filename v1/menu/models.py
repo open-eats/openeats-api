@@ -11,18 +11,10 @@ from v1.recipe.models import Recipe
 class Menu(models.Model):
     """
     Django Model to hold an Menus.
-    Ingredient Groups share a many to one relationship.
-    Meaning each Recipe will have many Ingredient Groups.
-    :title: = Title of the Ingredient Group (EX: Cheddar Biscuits)
     """
     title = models.CharField(_('title'), max_length=150, null=True, blank=True)
     description = models.CharField(_('description'), max_length=150, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    pub_date = models.DateTimeField(auto_now_add=True)
-    update_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['id']
@@ -33,8 +25,7 @@ class Menu(models.Model):
 
 class MenuItem(models.Model):
     """
-    Django Model to hold an Recipe that is related to a menu.
-    :occurrence: = When the user is planning to make the recipe. (EX: Monday, Breakfest, Lunch, Dinner)
+    Django Model to hold a Recipe that is related to a menu.
     """
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menu')
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='menu_recipe')
