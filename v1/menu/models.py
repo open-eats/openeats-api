@@ -29,6 +29,7 @@ class MenuItem(models.Model):
     """
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menu')
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='menu_recipe')
+    all_day = models.BooleanField(default=False, blank=True)
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
 

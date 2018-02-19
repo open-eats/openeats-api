@@ -19,6 +19,7 @@ class MenuItemSerializer(FieldLimiter, serializers.ModelSerializer):
             'recipe_title',
             'menu',
             'recipe',
+            'all_day',
             'start_date',
             'end_date',
         ]
