@@ -16,7 +16,7 @@ class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
     permission_classes = (IsMenuOwner,)
-    filter_fields = ('author',)
+    filter_fields = ('title', 'author',)
 
 
 class MenuItemViewSet(viewsets.ModelViewSet):

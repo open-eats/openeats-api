@@ -27,8 +27,6 @@ class MenuItemSerializer(FieldLimiter, serializers.ModelSerializer):
 
 class MenuSerializer(FieldLimiter, serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
-    menu = MenuItemSerializer(many=True, read_only=True)
-
     class Meta:
         model = Menu
         fields = [
