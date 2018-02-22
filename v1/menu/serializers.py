@@ -34,6 +34,5 @@ class MenuSerializer(FieldLimiter, serializers.ModelSerializer):
             'title',
             'description',
             'author',
-            'menu',
         ]
 
