@@ -13,4 +13,5 @@ router.register(r'menu-item', views.MenuItemViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),
+    url(r'^menu-copy/$', views.MenuCopyViewSet.as_view())
 ]
