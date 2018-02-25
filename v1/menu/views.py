@@ -45,8 +45,12 @@ class MenuCopyViewSet(APIView):
         new_menu.is_valid(raise_exception=True)
         new_menu.save()
 
-        first_item = MenuItem.objects.order_by('start_date').first()
-        days = abs((parser.parse(start) - first_item.start_date).days)
+        first_item = MenuItem.objects.filter(
+            menu__id=menu
+        ).order_by(
+            'start_date'
+        ).first()
+        days = (parser.parse(start) - first_item.start_date).days
 
         new_items = []
         for item in MenuItem.objects.filter(menu__id=menu):
