@@ -38,15 +38,17 @@ class CustomImageField(ImageField):
 
 class SubRecipeSerializer(serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
+    slug = serializers.ReadOnlyField(source='child_recipe.slug')
     title = serializers.ReadOnlyField(source='child_recipe.title')
 
     class Meta:
         model = SubRecipe
         fields = (
+            'child_recipe_id',
+            'slug',
             'quantity',
             'measurement',
             'title',
-            'child_recipe_id',
         )
 
 
@@ -59,6 +61,7 @@ class MiniBrowseSerializer(FieldLimiter, serializers.ModelSerializer):
         model = Recipe
         fields = (
             'id',
+            'slug',
             'title',
             'pub_date',
             'rating',
@@ -87,7 +90,7 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        exclude = ('slug',)
+        fields = '__all__'
 
     def update(self, instance, validated_data):
         """
