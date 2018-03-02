@@ -17,6 +17,7 @@ class GroceryListViewSet(viewsets.ModelViewSet):
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
     """
+    lookup_field = 'slug'
     serializer_class = GroceryListSerializer
     permission_classes = (IsListOwner,)
 
