@@ -26,10 +26,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('MYSQL_DATABASE', 'openeats'),
-        'USER': 'root',
+        'USER': os.environ.get('MYSQL_USER', 'root'),
         'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD', ''),
-        'HOST': 'db',
-        'PORT': '3306',
+        'HOST': os.environ.get('MYSQL_HOST', 'db'),
+        'PORT': os.environ.get('MYSQL_PORT', '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4'
         },
