@@ -16,7 +16,7 @@ before_install:
 - sleep 90
 
 script:
-- docker-compose -f test.yml -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" -p test run --rm --entrypoint 'sh tests.sh' api
+- docker-compose -f test.yml-p test run -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH"  --rm --entrypoint 'sh tests.sh' api
 
 after_success:
 - pwd
