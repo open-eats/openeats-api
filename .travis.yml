@@ -19,5 +19,7 @@ script:
 - docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' api
 
 after_success:
+- pwd
+- ls
 - cat .coverage
 - coveralls
