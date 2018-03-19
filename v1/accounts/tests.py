@@ -22,7 +22,7 @@ class AccountTests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp.json()['id'] == 1)
         decoded_token = jwt_decode_handler(resp.json()['token'])
-        self.assertTrue(decoded_token.get('id') == 1)
+        self.assertTrue(decoded_token.get('user_id') == 1)
         self.assertTrue(decoded_token.get('username') == 'testuser1')
 
     def test_obtain_authtoken_wrong_password(self):
