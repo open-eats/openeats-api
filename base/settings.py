@@ -1,5 +1,5 @@
 # Django settings for openeats project.
-import os
+import os, datetime
 
 # We can't set the debug just using the env var.
 # Python with evaluate any string as a True bool.
@@ -150,8 +150,9 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%B %-d, %Y",
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100,
@@ -161,6 +162,17 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/hour',
     }
+}
+
+# http://getblimp.github.io/django-rest-framework-jwt/#additional-settings
+JWT_AUTH = {
+    # We are returning custom data to our UI.
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'v1.accounts.jwt_handler.handler',
+
+    # Allow for token refresh and increase the timeout of the user token.
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=14),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(weeks=30),
 }
 
 # We don't want the API to serve static in production.
