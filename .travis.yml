@@ -9,6 +9,7 @@ services:
   - docker
 
 before_install:
+- pip install coveralls==1.3.0
 - docker-compose -f test.yml -p test build
 - docker-compose -f test.yml -p test up -d db
 # We are adding a sleep here so that the db has enough time to come online
@@ -16,3 +17,6 @@ before_install:
 
 script:
 - docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' api
+
+after_success:
+  coveralls
