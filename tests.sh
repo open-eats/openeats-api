@@ -5,4 +5,4 @@ env
 python manage.py reset_db --noinput
 python manage.py migrate
 coverage run manage.py test -k
-coveralls
+
