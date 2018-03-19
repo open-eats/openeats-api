@@ -3,7 +3,7 @@ sudo: required
 language: python
 
 python:
-  - "2.7"
+  - "3.6"
 
 services:
   - docker
@@ -19,4 +19,5 @@ script:
 - docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' api
 
 after_success:
-  coveralls
+- cat .coverage
+- coveralls
