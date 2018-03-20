@@ -21,4 +21,5 @@ coverage run --omit="*/migrations*,*/fixtures*" manage.py test -k
 coveralls
 
 # Submit report to Code Climate
-./cc-test-reporter after-build --coverage-input-type .coverage --exit-code 0
+./cc-test-reporter format-coverage
+./cc-test-reporter upload-coverage
