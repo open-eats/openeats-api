@@ -3,8 +3,6 @@ services:
   api:
     command: sh tests.sh
     build: .
-    volumes:
-      - .:/code
     depends_on:
       - db
     environment:
