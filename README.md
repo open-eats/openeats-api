@@ -2,6 +2,7 @@
 
 [![API Build Status](https://travis-ci.org/open-eats/openeats-api.svg?branch=master)](https://travis-ci.org/open-eats/openeats-api)
 [![Coverage Status](https://coveralls.io/repos/github/open-eats/openeats-api/badge.svg)](https://coveralls.io/github/open-eats/openeats-api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ac4a42717db53286ee8f/maintainability)](https://codeclimate.com/github/open-eats/openeats-api/maintainability)
 
 This is the API that powers OpenEats. It uses Django/Django Rest Framework to power the API. The core responsibilities of the APi are:
 - OpenEats REST API

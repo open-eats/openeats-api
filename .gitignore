@@ -12,3 +12,4 @@ database/
 *.css.map
 *.js.map
 *.log
+.coverage
