@@ -20,8 +20,9 @@ script:
 - docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' -e TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT -e CC_TEST_REPORTER_ID=64dc37c481776a5d67187d6b3236d5fb8c3193e9f44e52dc673c9013b86f87a1 api
 
 after_success:
-- pwd
-- ls
-- coverage report
-- cat .coverage
+#- pwd
+#- ls
+#- coverage report
+#- cat .coverage
+- sed -i 's_/code/__g' file.txt
 - coveralls
