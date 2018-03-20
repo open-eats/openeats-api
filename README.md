@@ -24,7 +24,8 @@ To run tests locally:
 cd openeats-web
 docker-compose -f test.yml -p test build
 docker-compose -f test.yml -p test up -d db
-docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' api
+docker-compose -f test.yml -p test run --rm --entrypoint sh api
+python manage.py test
 ```
 
 Note: If this is the first time you are running the tests, give the DB some time to build itself once it's build there is no need to wait again.
