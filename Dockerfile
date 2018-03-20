@@ -4,6 +4,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apk update && apk upgrade && \
     apk add --no-cache \
     gcc \
+    git \
     mariadb \
     mariadb-dev \
     py-mysqldb \
