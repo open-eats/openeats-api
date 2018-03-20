@@ -3,6 +3,7 @@
 # Install test related dependencies
 pip install coveralls==1.3.0
 apk add git
+apk add curl
 
 # Install Code Climate script
 curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
