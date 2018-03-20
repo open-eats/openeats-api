@@ -9,20 +9,10 @@ services:
   - docker
 
 before_install:
-- pip install coveralls==1.3.0
 - docker-compose -f test.yml -p test build
 - docker-compose -f test.yml -p test up -d db
 # We are adding a sleep here so that the db has enough time to come online
 - sleep 90
 
 script:
-#- docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' -e TRAVIS_JOB_ID=$TRAVIS_JOB_ID -e TRAVIS_BRANCH=$TRAVIS_BRANCH -e COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN api
-- docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' -e TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT -e CC_TEST_REPORTER_ID=64dc37c481776a5d67187d6b3236d5fb8c3193e9f44e52dc673c9013b86f87a1 api
-
-after_success:
-#- pwd
-#- ls
-#- coverage report
-#- cat .coverage
-- sed -i 's///code////g' .coverage
-- coveralls
+- docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' -e TRAVIS_JOB_ID=$TRAVIS_JOB_ID -e TRAVIS_BRANCH=$TRAVIS_BRANCH -e TRAVIS=$TRAVIS api
