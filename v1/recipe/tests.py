@@ -37,7 +37,7 @@ class RecipeSerializerTests(unittest.TestCase):
         recipe = mock.Mock(spec=Recipe)
         response = self.serializer.update(recipe, data)
 
-        self.assertEqual(response.rating, 5)
+        self.assertEqual(response.rating, 50)
 
     def test_rating_under_success(self):
         data = deepcopy(self.data)
