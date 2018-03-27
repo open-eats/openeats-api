@@ -10,6 +10,14 @@ python manage.py migrate
 
 # Run the tests and create a coverage report
 coverage run --omit="*/migrations*,*/fixtures*" manage.py test -k
+if [ $? -eq 0 ]
+then
+  echo "The script ran ok"
+  exit 0
+else
+  echo "The script failed" >&2
+  exit 1
+fi
 
 # Submit coverage to Coveralls
 coveralls
