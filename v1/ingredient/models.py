@@ -41,8 +41,8 @@ class Ingredient(models.Model):
     # It should be removed in future versions.
     title = models.CharField(_('title'), max_length=250)
     quantity = models.FloatField(_('quantity'), default=0)
-    numerator = models.IntegerField(_('numerator'), default=1)
-    denominator = models.IntegerField(_('denominator'), default=1)
+    numerator = models.FloatField(_('numerator'), default=1)
+    denominator = models.FloatField(_('denominator'), default=1)
     measurement = models.CharField(_('measurement'), max_length=200, blank=True, null=True)
     ingredient_group = models.ForeignKey(IngredientGroup, on_delete=models.CASCADE, related_name='ingredients', null=True)
  

@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='ingredient',
             name='denominator',
-            field=models.IntegerField(default=1, verbose_name='denominator'),
+            field=models.FloatField(default=1, verbose_name='denominator'),
         ),
         migrations.AddField(
             model_name='ingredient',
             name='numerator',
-            field=models.IntegerField(default=1, verbose_name='numerator'),
+            field=models.FloatField(default=1, verbose_name='numerator'),
         ),
     ]
