@@ -31,11 +31,18 @@ class Ingredient(models.Model):
     Ingredients share a many to one relationship.
     Meaning each Ingredient Group will have many Ingredients.
     :title: = Title of the Ingredient (EX: Flour)
-    :quantity: = Title of the Ingredient (EX: 200, 15, 2)
-    :measurement: = Title of the Ingredient (EX: Liters, Cups, Grams, tablespoons)
+    :numerator: = Numerator of the quantity expressed as a fraction
+    :denominator: = Denominator of the quantity expressed as a fraction
+    :measurement: = Measurement of the Ingredient (EX: Liters, Cups, Grams, tablespoons)
+    :quantity: = Amount of the Ingredient Needed (EX: 200, 15, 2)
     """
+    # TODO: quantity is no longer used. (Apr. 5 2018)
+    # It is only here to allow for rollbacks to older version .
+    # It should be removed in future versions.
     title = models.CharField(_('title'), max_length=250)
     quantity = models.FloatField(_('quantity'), default=0)
+    numerator = models.FloatField(_('numerator'), default=1)
+    denominator = models.FloatField(_('denominator'), default=1)
     measurement = models.CharField(_('measurement'), max_length=200, blank=True, null=True)
     ingredient_group = models.ForeignKey(IngredientGroup, on_delete=models.CASCADE, related_name='ingredients', null=True)
  
