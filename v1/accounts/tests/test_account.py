@@ -4,11 +4,12 @@
 from django.test import TestCase
 from rest_framework_jwt.settings import api_settings
 
-jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
-
 
 class AccountTests(TestCase):
-    fixtures=['test/users.json']
+    fixtures = ['test/users.json']
+
+    def setUp(self):
+        self.jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
 
     def test_obtain_authtoken_success(self):
         resp = self.client.post(
@@ -21,7 +22,7 @@ class AccountTests(TestCase):
 
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp.json()['id'] == 1)
-        decoded_token = jwt_decode_handler(resp.json()['token'])
+        decoded_token = self.jwt_decode_handler(resp.json()['token'])
         self.assertTrue(decoded_token.get('user_id') == 1)
         self.assertTrue(decoded_token.get('username') == 'testuser1')
 

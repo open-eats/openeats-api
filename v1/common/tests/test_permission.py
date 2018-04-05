@@ -3,37 +3,7 @@
 
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase, RequestFactory
-from v1.recipe.models import Recipe
-from v1.common.recipe_search import get_search_results
 from v1.common.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
-
-
-class GetSearchResultsTests(TestCase):
-    fixtures = [
-        'test/users.json',
-        'course_data.json',
-        'cuisine_data.json',
-        'ing_data.json',
-        'recipe_data.json'
-    ]
-
-    def test_get_search_results(self):
-        query = get_search_results(
-            ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
-            Recipe.objects,
-            'chili'
-        ).distinct()
-
-        self.assertTrue(len(query.all()) > 0)
-
-    def test_get_search_no_results(self):
-        query = get_search_results(
-            ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
-            Recipe.objects,
-            'blue berry'
-        ).distinct()
-
-        self.assertTrue(len(query.all()) == 0)
 
 
 class PermissionTest(TestCase):
@@ -71,7 +41,7 @@ class PermissionTest(TestCase):
             IsOwnerOrReadOnly().has_permission(request, None)
         )
 
-    def test_is_admin_admin(self):
+    def test_is_admin_or_read_only(self):
         # Recall that middleware are not supported. You can simulate a
         # logged-in user by setting request.user manually.
         request = self.factory.get('/admin')
