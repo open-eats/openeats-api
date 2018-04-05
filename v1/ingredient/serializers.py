@@ -12,7 +12,6 @@ class IngredientSerializer(serializers.ModelSerializer):
         model = Ingredient
         fields = [
             'id',
-            'quantity',
             'numerator',
             'denominator',
             'measurement',
