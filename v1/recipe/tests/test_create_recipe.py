@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import json
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APIRequestFactory
 from v1.recipe import views
 
@@ -142,6 +142,15 @@ class RecipeSerializerTests(TestCase):
         }
         request = self.factory.post('/api/v1/recipe/recipes/', data=data)
         request.user = self.staff
+
+        with open('/code/food.jpg', 'rb') as f:
+            request.FILES['photo'] = SimpleUploadedFile(
+                '/code/food.jpg',
+                f.read(),
+                content_type='multipart/form-data'
+            )
         response = view(request)
+
+        print(response.data)
 
         self.assertTrue(response.data.get('id', True))
