@@ -19,7 +19,7 @@ class RecipeSerializerTests(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
 
-    def test_view(self):
+    def test_retrieve_view(self):
         """Try and read the view of a recipe"""
         view = views.RecipeViewSet.as_view({'get': 'retrieve'})
         request = self.factory.get('/api/v1/recipe/recipes/tasty-chili')
@@ -29,6 +29,14 @@ class RecipeSerializerTests(TestCase):
         self.assertTrue(response.data.get('title') == 'Tasty Chili')
         self.assertTrue(response.data.get('prep_time') == 60)
         self.assertTrue(response.data.get('servings') == 8)
+
+    def test_list_view(self):
+        """Try and read the view of a recipe"""
+        view = views.RecipeViewSet.as_view({'get': 'list'})
+        request = self.factory.get('/api/v1/recipe/recipes/tasty-chili?course=entry&cuisine=american&rating=3')
+        response = view(request)
+
+        self.assertEqual(len(response.data.get('results')), 31)
 
     def test_mini_browse(self):
         """Try and read the view of a recipe"""
