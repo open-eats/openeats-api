@@ -63,6 +63,9 @@ class BulkGroceryItemViewSet(ListBulkCreateUpdateDestroyAPIView):
         if not self.allow_bulk_destroy(qs, filtered):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+        print('hi')
+        print(filtered)
+        print(self.request.data)
         self.perform_bulk_destroy(filtered)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
