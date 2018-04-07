@@ -8,7 +8,12 @@ from v1.recipe_groups import views
 
 
 class RecipeGroupsTests(TestCase):
-    fixtures = ['test/users.json', 'test/cuisine.json', 'test/course.json', 'test/recipes.json']
+    fixtures = [
+        'test/users.json',
+        'course_data.json',
+        'cuisine_data.json',
+        'recipe_data.json'
+    ]
 
     def setUp(self):
         self.factory = APIRequestFactory()
@@ -18,10 +23,10 @@ class RecipeGroupsTests(TestCase):
         request = self.factory.get('/api/v1/recipe_groups/cuisine-count/')
         response = view(request)
 
-        self.assertEqual(response.data.get('count'), 3)
+        self.assertEqual(response.data.get('count'), 1)
 
         results = response.data.get('results')
-        totals = {"cuisine-1": 3, "cuisine-2": 2, "cuisine-3": 1}
+        totals = {"american": 31}
 
         for item in results:
             self.assertEquals(totals[item.get('slug')], item.get('total'))
@@ -31,30 +36,30 @@ class RecipeGroupsTests(TestCase):
         request = self.factory.get('/api/v1/recipe_groups/course-count/')
         response = view(request)
 
-        self.assertEqual(response.data.get('count'), 3)
+        self.assertEqual(response.data.get('count'), 1)
 
         results = response.data.get('results')
-        totals = {"course-1": 3, "course-2": 2, "course-3": 1}
+        totals = {"entry": 31}
 
         for item in results:
             self.assertEquals(totals[item.get('slug')], item.get('total'))
 
     def test_cuisine_with_filters(self):
         view = views.CuisineCountViewSet.as_view({'get': 'list'})
-        request = self.factory.get('/api/v1/recipe_groups/cuisine-count/?course=course-1&rating=0')
+        request = self.factory.get('/api/v1/recipe_groups/cuisine-count/?course=entry&rating=3')
         response = view(request)
 
         self.assertEqual(response.data.get('count'), 1)
 
         results = response.data.get('results')
-        totals = {"cuisine-1": 1}
+        totals = {"american": 31}
 
         for item in results:
             self.assertEquals(totals[item.get('slug')], item.get('total'))
 
     def test_cuisine_with_course_filter_no_results(self):
         view = views.CuisineCountViewSet.as_view({'get': 'list'})
-        request = self.factory.get('/api/v1/recipe_groups/cuisine-count/?course=course-4&rating=0')
+        request = self.factory.get('/api/v1/recipe_groups/cuisine-count/?course=entry&rating=0')
         response = view(request)
 
         self.assertEqual(response.data.get('count'), 0)
@@ -68,20 +73,20 @@ class RecipeGroupsTests(TestCase):
 
     def test_course_with_filters(self):
         view = views.CourseCountViewSet.as_view({'get': 'list'})
-        request = self.factory.get('/api/v1/recipe_groups/course-count/?cuisine=cuisine-1&rating=1')
+        request = self.factory.get('/api/v1/recipe_groups/course-count/?cuisine=american&rating=3')
         response = view(request)
 
         self.assertEqual(response.data.get('count'), 1)
 
         results = response.data.get('results')
-        totals = {"course-3": 1}
+        totals = {"entry": 31}
 
         for item in results:
             self.assertEquals(totals[item.get('slug')], item.get('total'))
 
     def test_course_with_cuisine_filter_no_results(self):
         view = views.CourseCountViewSet.as_view({'get': 'list'})
-        request = self.factory.get('/api/v1/recipe_groups/course-count/?cuisine=cuisine-4&rating=0')
+        request = self.factory.get('/api/v1/recipe_groups/course-count/?cuisine=american&rating=0')
         response = view(request)
 
         self.assertEqual(response.data.get('count'), 0)
