@@ -11,11 +11,12 @@ class GetSearchResultsTests(TestCase):
         'test/users.json',
         'course_data.json',
         'cuisine_data.json',
-        'ing_data.json',
         'recipe_data.json'
+        'ing_data.json',
     ]
 
     def test_get_search_results(self):
+        """ Run a search that will return data """
         query = get_search_results(
             ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
             Recipe.objects,
@@ -25,6 +26,7 @@ class GetSearchResultsTests(TestCase):
         self.assertTrue(len(query.all()) > 0)
 
     def test_get_search_no_results(self):
+        """ Run a search that will return no data """
         query = get_search_results(
             ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
             Recipe.objects,
