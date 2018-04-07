@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import unittest
 import mock
+from django.test import TestCase
 from copy import deepcopy
 
 from v1.recipe.serializers import RecipeSerializer
 from v1.recipe.models import Recipe
 
 
-class RecipeSerializerTests(unittest.TestCase):
+class RecipeSerializerTests(TestCase):
     def setUp(self):
         self.serializer = RecipeSerializer()
         self.data = {
