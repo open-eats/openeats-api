@@ -12,6 +12,7 @@ class AccountTests(TestCase):
         self.jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
 
     def test_obtain_authtoken_success(self):
+        """ Try and login and confirm that the login was successful """
         resp = self.client.post(
             '/api/v1/accounts/obtain-auth-token/',
             {
@@ -27,6 +28,7 @@ class AccountTests(TestCase):
         self.assertTrue(decoded_token.get('username') == 'testuser1')
 
     def test_obtain_authtoken_wrong_password(self):
+        """ Try and login and confirm that the login was unsuccessful """
         resp = self.client.post(
             '/api/v1/accounts/obtain-auth-token/',
             {
