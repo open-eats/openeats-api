@@ -11,8 +11,8 @@ class GetSearchResultsTests(TestCase):
         'test/users.json',
         'course_data.json',
         'cuisine_data.json',
-        'recipe_data.json'
-        'ing_data.json',
+        'recipe_data.json',
+        'ing_data.json'
     ]
 
     def test_get_search_results(self):
