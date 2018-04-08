@@ -3,7 +3,7 @@ sudo: required
 language: python
 
 python:
-  - "2.7"
+  - "3.6"
 
 services:
   - docker
@@ -15,4 +15,9 @@ before_install:
 - sleep 90
 
 script:
-- docker-compose -f test.yml -p test run --rm --entrypoint 'sh tests.sh' api
+- docker-compose -f test.yml -p test run --rm
+  --entrypoint 'sh tests.sh'
+  -e TRAVIS_JOB_ID=$TRAVIS_JOB_ID
+  -e TRAVIS_BRANCH=$TRAVIS_BRANCH
+  -e TRAVIS=$TRAVIS
+  api
