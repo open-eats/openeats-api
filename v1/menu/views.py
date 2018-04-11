@@ -41,7 +41,10 @@ class MenuCopyViewSet(APIView):
         description = request.data.get('description')
         start = request.data.get('start')
 
-        new_menu = MenuSerializer(data={'title':title, 'description':description})
+        new_menu = MenuSerializer(data={
+            'title': title,
+            'description': description
+        })
         new_menu.is_valid(raise_exception=True)
         new_menu.save()
 
@@ -55,11 +58,11 @@ class MenuCopyViewSet(APIView):
         new_items = []
         for item in MenuItem.objects.filter(menu__id=menu):
             new_item = MenuItemSerializer(data={
-                'menu':new_menu.data.get('id'),
-                'recipe':item.recipe.id,
-                'all_day':item.all_day,
-                'start_date':item.start_date + timedelta(days=days),
-                'end_date':item.end_date + timedelta(days=days)
+                'menu': new_menu.data.get('id'),
+                'recipe': item.recipe.id,
+                'all_day': item.all_day,
+                'start_date': item.start_date + timedelta(days=days),
+                'end_date': item.end_date + timedelta(days=days)
             })
             new_item.is_valid(raise_exception=True)
             new_item.save()
