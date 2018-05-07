@@ -41,7 +41,6 @@ class Recipe(models.Model):
     photo = models.ImageField(_('photo'), blank=True, upload_to="upload/recipe_photos")
     photo_thumbnail = ImageSpecField(source='photo',
                                      processors=[ResizeToFill(300, 200)],
-                                     format='JPEG',
                                      options={'quality': 70})
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
