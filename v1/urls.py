@@ -10,5 +10,6 @@ urlpatterns = [
     path('ingredient/', include('v1.ingredient.urls')),
     path('list/', include('v1.list.urls')),
     path('news/', include('v1.news.urls')),
+    path('menu/', include('v1.menu.urls')),
     path('recipe/', include('v1.recipe.urls')),
 ]
