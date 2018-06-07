@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'v1.ingredient',
     'v1.news',
     'v1.list',
+    'v1.rating',
 
     'imagekit',
     'django_extensions',

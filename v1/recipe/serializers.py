@@ -56,6 +56,8 @@ class MiniBrowseSerializer(FieldLimiter, serializers.ModelSerializer):
     """ Used to get random recipes and limit the return data. """
     photo_thumbnail = CustomImageField(required=False)
     pub_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+    # TODO: Add the average rating here.
+    # rating =
 
     class Meta:
         model = Recipe
@@ -64,7 +66,6 @@ class MiniBrowseSerializer(FieldLimiter, serializers.ModelSerializer):
             'slug',
             'title',
             'pub_date',
-            'rating',
             'photo_thumbnail',
             'info'
         )
@@ -106,13 +107,14 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         if 'request' in self.context:
             subrecipe_data = self.context['request'].data.get('subrecipes')
 
-        if 'rating' in validated_data:
-            rating = int(validated_data.get('rating', 0))
-            if rating < 0:
-                rating = 0
-            elif rating > 5:
-                rating = 5
-            validated_data['rating'] = rating
+        # TODO: move this logic
+        # if 'rating' in validated_data:
+        #     rating = int(validated_data.get('rating', 0))
+        #     if rating < 0:
+        #         rating = 0
+        #     elif rating > 5:
+        #         rating = 5
+        #     validated_data['rating'] = rating
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -179,13 +181,14 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         if 'request' in self.context:
             subrecipe_data = self.context['request'].data.get('subrecipes')
 
-        if 'rating' in validated_data:
-            rating = int(validated_data.get('rating', 0))
-            if rating < 0:
-                rating = 0
-            elif rating > 5:
-                rating = 5
-            validated_data['rating'] = rating
+        # TODO: move this logic
+        # if 'rating' in validated_data:
+        #     rating = int(validated_data.get('rating', 0))
+        #     if rating < 0:
+        #         rating = 0
+        #     elif rating > 5:
+        #         rating = 5
+        #     validated_data['rating'] = rating
 
         # Create the recipe.
         # Use the log-in user as the author.

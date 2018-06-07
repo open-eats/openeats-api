@@ -31,7 +31,6 @@ class Recipe(models.Model):
     :prep_time: = How long it takes to prepare the recipe
     :cook_time: = How long the recipe takes to cook
     :servings: = How many people the recipe with serve
-    :rating: = Rating of the recipe
     :pub_date: = When the recipe was created
     :update_date: = When the recipe was updated
     """
@@ -53,7 +52,6 @@ class Recipe(models.Model):
     prep_time = models.IntegerField(_('prep time'), help_text="enter time in minutes")
     cook_time = models.IntegerField(_('cook time'), help_text="enter time in minutes")
     servings = models.IntegerField(_('servings'), help_text="enter total number of servings")
-    rating = models.IntegerField(_('rating'), help_text="rating of the meal", default=0)
     pub_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
     public = models.BooleanField(default=True)
