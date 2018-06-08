@@ -107,15 +107,6 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         if 'request' in self.context:
             subrecipe_data = self.context['request'].data.get('subrecipes')
 
-        # TODO: move this logic
-        # if 'rating' in validated_data:
-        #     rating = int(validated_data.get('rating', 0))
-        #     if rating < 0:
-        #         rating = 0
-        #     elif rating > 5:
-        #         rating = 5
-        #     validated_data['rating'] = rating
-
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
@@ -180,15 +171,6 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         subrecipe_data = None
         if 'request' in self.context:
             subrecipe_data = self.context['request'].data.get('subrecipes')
-
-        # TODO: move this logic
-        # if 'rating' in validated_data:
-        #     rating = int(validated_data.get('rating', 0))
-        #     if rating < 0:
-        #         rating = 0
-        #     elif rating > 5:
-        #         rating = 5
-        #     validated_data['rating'] = rating
 
         # Create the recipe.
         # Use the log-in user as the author.

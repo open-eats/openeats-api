@@ -21,6 +21,15 @@ class Rating(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     comment = models.CharField(_('comment'), max_length=250)
+    # TODO: add a range requirement
+    # if 'rating' in validated_data:
+    #     rating = int(validated_data.get('rating', 0))
+    #     if rating < 0:
+    #         rating = 0
+    #     elif rating > 5:
+    #         rating = 5
+    #     validated_data['rating'] = rating
+
     rating = models.IntegerField(_('rating'), default=0)
 
     class Meta:

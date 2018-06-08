@@ -6,14 +6,12 @@ import tempfile
 import requests
 import random
 from django.core import files
-from django.db.models import Count
 from rest_framework import permissions, viewsets, filters
 from rest_framework.response import Response
 
 from . import serializers
 from .models import Recipe
 from v1.recipe_groups.models import Cuisine, Course
-from v1.common.recipe_search import get_search_results
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -111,42 +109,3 @@ class MiniBrowseViewSet(viewsets.mixins.ListModelMixin,
         self.queryset = Recipe.objects.filter(id__in=rand_ids)
 
         return super(MiniBrowseViewSet, self).list(request, *args, **kwargs)
-
-
-class RatingViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = serializers.RatingSerializer
-
-    def get_queryset(self):
-        query = Recipe.objects
-        filter_set = {}
-
-        # If user is anonymous, restrict recipes to public.
-        if not self.request.user.is_authenticated:
-            filter_set['public'] = True
-
-        if 'cuisine' in self.request.query_params:
-            try:
-                filter_set['cuisine__in'] = Cuisine.objects.filter(
-                    slug__in=self.request.query_params.get('cuisine').split(',')
-                )
-            except:
-                return []
-
-        if 'course' in self.request.query_params:
-            try:
-                filter_set['course__in'] = Course.objects.filter(
-                    slug__in=self.request.query_params.get('course').split(',')
-                )
-            except:
-                return []
-
-        if 'search' in self.request.query_params:
-            query = get_search_results(
-                ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
-                query,
-                self.request.query_params.get('search')
-            ).distinct()
-
-        query = query.filter(**filter_set)
-
-        return query.values('rating').annotate(total=Count('id', distinct=True)).order_by('-rating')

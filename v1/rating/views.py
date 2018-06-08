@@ -2,10 +2,17 @@
 # encoding: utf-8
 
 from rest_framework import viewsets
+from django.db.models import Count
 
 from .models import Rating
 from .serializers import RatingSerializer
 from .permissions import IsOwnerOrReadOnly
+from .custom_pagination import RatingPagination
+
+from . import serializers
+from .models import Recipe
+from v1.recipe_groups.models import Cuisine, Course
+from v1.common.recipe_search import get_search_results
 
 
 class RatingViewSet(viewsets.ModelViewSet):
@@ -17,9 +24,10 @@ class RatingViewSet(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     permission_classes = (IsOwnerOrReadOnly,)
     filter_fields = ('recipe', 'author', 'comment', 'rating')
+    pagination_class = RatingPagination
 
 
-class RatingViewSet(viewsets.ReadOnlyModelViewSet):
+class BrowseRatingViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.RatingSerializer
 
     def get_queryset(self):
