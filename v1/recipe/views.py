@@ -36,6 +36,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_authenticated:
             filter_set['public'] = True
 
+        if 'v' in self.request.v:
+            filter_set['cuisine__in'] = Cuisine.objects.filter(
+                slug__in=self.request.query_params.get('cuisine__slug').split(',')
+            )
+
         if 'cuisine__slug' in self.request.query_params:
             filter_set['cuisine__in'] = Cuisine.objects.filter(
                 slug__in=self.request.query_params.get('cuisine__slug').split(',')

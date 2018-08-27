@@ -10,6 +10,7 @@ from . import views
 router = DefaultRouter()
 router.register(r'menu', views.MenuViewSet)
 router.register(r'menu-item', views.MenuItemViewSet)
+router.register(r'menu-recipes', views.RecipeItemViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),

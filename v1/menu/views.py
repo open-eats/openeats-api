@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from datetime import timedelta
 from dateutil import parser
 
+from v1.recipe.serializers import MiniBrowseSerializer
+from v1.recipe.models import Recipe
 from .models import MenuItem, Menu
 from .serializers import MenuItemSerializer, MenuSerializer
 from .permissions import IsMenuOwner, IsMenuItemOwner
@@ -32,6 +34,17 @@ class MenuItemViewSet(viewsets.ModelViewSet):
     serializer_class = MenuItemSerializer
     permission_classes = (IsMenuItemOwner,)
     filter_fields = ('menu', 'recipe', 'start_date', 'end_date')
+
+
+class RecipeItemViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve`
+    actions for Menu Items.
+    """
+    serializer_class = MiniBrowseSerializer
+
+    def get_queryset(self):
+        return Recipe.objects.filter(menu_recipe=1)
 
 
 class MenuCopyViewSet(APIView):
