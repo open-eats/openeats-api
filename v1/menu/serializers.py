@@ -11,13 +11,13 @@ from .models import MenuItem
 
 class MenuItemSerializer(FieldLimiter, serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
-    recipe = MiniBrowseSerializer(required=False)
-    # recipe_title = CharField(source='recipe.title', read_only=True)
-    # recipe_slug = CharField(source='recipe.slug', read_only=True)
-    # recipe_pub_date = CharField(source='recipe.pub_date', read_only=True)
-    # recipe_rating = CharField(source='recipe.rating', read_only=True)
-    # recipe_photo_thumbnail = CharField(source='recipe.photo_thumbnail', read_only=True)
-    # recipe_info = CharField(source='recipe.info', read_only=True)
+    # recipe = MiniBrowseSerializer(required=False)
+    recipe_title = CharField(source='recipe.title', read_only=True)
+    recipe_slug = CharField(source='recipe.slug', read_only=True)
+    recipe_pub_date = CharField(source='recipe.pub_date', read_only=True)
+    recipe_rating = CharField(source='recipe.rating', read_only=True)
+    recipe_photo_thumbnail = CharField(source='recipe.photo_thumbnail', read_only=True)
+    recipe_info = CharField(source='recipe.info', read_only=True)
 
     class Meta:
         model = MenuItem
@@ -29,5 +29,12 @@ class MenuItemSerializer(FieldLimiter, serializers.ModelSerializer):
             'all_day',
             'start_date',
             'end_date',
+
             'recipe',
+            'recipe_title',
+            'recipe_slug',
+            'recipe_pub_date',
+            'recipe_rating',
+            'recipe_photo_thumbnail',
+            'recipe_info'
         ]
