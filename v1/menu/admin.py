@@ -2,15 +2,7 @@
 # encoding: utf-8
 
 from django.contrib import admin
-from .models import Menu, MenuItem
-
-
-class MenuAdmin(admin.ModelAdmin):
-    # ordering = ['title', 'ingredient_group']
-    # list_display = ['title', 'quantity', 'measurement']
-    # list_filter = ['ingredient_group__title']
-    # search_fields = ['title', 'ingredient_group__title', ]
-    pass
+from .models import MenuItem
 
 
 class MenuItemAdmin(admin.ModelAdmin):
@@ -21,5 +13,4 @@ class MenuItemAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Menu, MenuAdmin)
 admin.site.register(MenuItem, MenuItemAdmin)

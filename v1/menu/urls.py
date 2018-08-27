@@ -8,11 +8,8 @@ from . import views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'menu', views.MenuViewSet)
 router.register(r'menu-item', views.MenuItemViewSet)
-router.register(r'menu-recipes', views.RecipeItemViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),
-    url(r'^menu-copy/$', views.MenuCopyViewSet.as_view())
 ]
