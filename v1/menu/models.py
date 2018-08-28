@@ -19,7 +19,7 @@ class MenuItem(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['start_date', 'id']
 
     def __unicode__(self):
         return '%s' % self.recipe.title
