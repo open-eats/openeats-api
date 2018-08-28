@@ -16,9 +16,10 @@ class MenuItemViewSet(viewsets.ModelViewSet):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     permission_classes = (IsMenuItemOwner,)
-    filter_fields = ('recipe', 'start_date', 'end_date')
+    filter_fields = ('recipe', 'start_date', 'end_date', 'complete')
 
-    # def get_queryset(self):
-    #     if self.request.user:
-    #         return MenuItem.objects.filter(author=self.request.user)
-    #     return MenuItem.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        if user and not user.is_anonymous:
+            return MenuItem.objects.filter(author=user)
+        return MenuItem.objects.none()
