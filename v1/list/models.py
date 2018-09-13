@@ -68,15 +68,3 @@ class GroceryShared(models.Model):
     def __unicode__(self):
         return '%s' % self.list.title
 
-
-class GroceryRecipe(models.Model):
-    """
-    This model links a GroceryList to a Recipe.
-    list = The GroceryList has holds the Recipe.
-    recipe = The Recipe that is on a GroceryList.
-    """
-    list = models.ForeignKey(GroceryList, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-    def __unicode__(self):
-        return '%s' % self.recipe.title
