@@ -5,6 +5,7 @@ from rest_framework import filters, viewsets, status
 from rest_framework.response import Response
 from rest_framework_bulk import ListBulkCreateUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Q
 
 from .models import GroceryList, GroceryItem
 from .serializers import GroceryListSerializer, \
@@ -24,7 +25,9 @@ class GroceryListViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         if user and not user.is_anonymous:
-            return GroceryList.objects.filter(author=user)
+            return GroceryList.objects.filter(
+                Q(author=user) | Q(groceryshared__shared_to=user)
+            )
         return GroceryList.objects.none()
 
 
@@ -42,7 +45,9 @@ class GroceryItemViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         if user and not user.is_anonymous:
-            return GroceryItem.objects.filter(list__author=user).order_by('list')
+            return GroceryItem.objects.filter(
+                Q(list__author=user) | Q(list__groceryshared__shared_to=user)
+            )
         return GroceryItem.objects.none()
 
 
@@ -52,9 +57,16 @@ class BulkGroceryItemViewSet(ListBulkCreateUpdateDestroyAPIView):
     `update` and `destroy` actions in bulk.
     See: https://github.com/miki725/django-rest-framework-bulk
     """
-    queryset = GroceryItem.objects.all()
     serializer_class = BulkGroceryItemSerializer
     permission_classes = (IsItemOwner,)
+
+    def get_queryset(self):
+        user = self.request.user
+        if user and not user.is_anonymous:
+            return GroceryItem.objects.filter(
+                Q(list__author=user) | Q(list__groceryshared__shared_to=user)
+            )
+        return GroceryItem.objects.none()
 
     def bulk_destroy(self, request, *args, **kwargs):
         qs = self.get_queryset()

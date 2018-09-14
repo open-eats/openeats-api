@@ -31,4 +31,5 @@ class IsItemOwner(permissions.BasePermission):
             return True
 
         # Write/Read permissions are only allowed to the owner of the list.
-        return obj.list.author == request.user
+        return obj.list.author == request.user or \
+               obj.list.groceryshared.shared_to == request.user
