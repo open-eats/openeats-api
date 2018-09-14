@@ -31,10 +31,9 @@ class GroceryItemAdmin(admin.ModelAdmin):
 
 
 class GrocerySharedAdmin(admin.ModelAdmin):
-    list_display = ['list', 'shared_by']
+    list_display = ['list', 'shared_by', 'shared_to']
     list_filter = ['shared_by', 'shared_to']
     search_fields = ['shared_by__username', 'shared_to__username']
-    exclude = ['shared_by']
     ordering = ['list']
 
 

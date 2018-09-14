@@ -26,7 +26,7 @@ class GroceryList(models.Model):
     class Meta:
         ordering = ['pub_date']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
     def item_count(self):
@@ -49,7 +49,7 @@ class GroceryItem(models.Model):
     class Meta:
         ordering = ['pk']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
 
@@ -65,6 +65,6 @@ class GroceryShared(models.Model):
     shared_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shared_by")
     shared_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shared_to")
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.list.title
 
