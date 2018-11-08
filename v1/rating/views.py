@@ -7,7 +7,6 @@ from django.db.models import Count
 from .models import Rating
 from .serializers import RatingSerializer
 from .permissions import IsOwnerOrReadOnly
-from .custom_pagination import RatingPagination
 
 from . import serializers
 from .models import Recipe
@@ -24,7 +23,6 @@ class RatingViewSet(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     permission_classes = (IsOwnerOrReadOnly,)
     filter_fields = ('recipe', 'recipe__slug', 'author', 'comment', 'rating')
-    pagination_class = RatingPagination
 
 
 class BrowseRatingViewSet(viewsets.ReadOnlyModelViewSet):
