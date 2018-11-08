@@ -36,6 +36,20 @@ class CustomImageField(ImageField):
         return super(ImageField, self).to_representation(value)
 
 
+class RecipeSlug(serializers.Serializer):
+    def to_representation(self, value):
+        try:
+            return value.slug
+        except:
+            return super(RecipeSlug, self).to_representation(value)
+
+    def to_internal_value(self, data):
+        try:
+            return Recipe.objects.get(slug=data)
+        except:
+            return super(RecipeSlug, self).to_internal_value(data)
+
+
 class SubRecipeSerializer(serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     slug = serializers.ReadOnlyField(source='child_recipe.slug')

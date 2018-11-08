@@ -23,7 +23,7 @@ class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     permission_classes = (IsOwnerOrReadOnly,)
-    filter_fields = ('recipe', 'author', 'comment', 'rating')
+    filter_fields = ('recipe', 'recipe__slug', 'author', 'comment', 'rating')
     pagination_class = RatingPagination
 
 
