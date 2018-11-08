@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'v1.ingredient',
     'v1.news',
     'v1.list',
+    'v1.menu',
     'v1.rating',
 
     'imagekit',
@@ -148,7 +149,6 @@ USE_TZ = True
 LANGUAGE_CODE = 'en-us'
 
 REST_FRAMEWORK = {
-    'DATETIME_FORMAT': "%B %-d, %Y",
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',

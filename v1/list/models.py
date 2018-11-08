@@ -26,7 +26,7 @@ class GroceryList(models.Model):
     class Meta:
         ordering = ['pub_date']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
     def item_count(self):
@@ -49,7 +49,7 @@ class GroceryItem(models.Model):
     class Meta:
         ordering = ['pk']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
 
@@ -65,18 +65,6 @@ class GroceryShared(models.Model):
     shared_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shared_by")
     shared_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shared_to")
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.list.title
 
-
-class GroceryRecipe(models.Model):
-    """
-    This model links a GroceryList to a Recipe.
-    list = The GroceryList has holds the Recipe.
-    recipe = The Recipe that is on a GroceryList.
-    """
-    list = models.ForeignKey(GroceryList, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-    def __unicode__(self):
-        return '%s' % self.recipe.title
