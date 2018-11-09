@@ -22,3 +22,23 @@ class RatingSerializer(serializers.ModelSerializer):
             'username',
             'author'
         ]
+
+    def update(self, instance, validated_data):
+        if 'rating' in validated_data:
+            rating = int(validated_data.get('rating', 0))
+            if rating < 0:
+                rating = 0
+            elif rating > 5:
+                rating = 5
+            validated_data['rating'] = rating
+        return super(RatingSerializer, self).update(instance, validated_data)
+
+    def create(self, validated_data):
+        if 'rating' in validated_data:
+            rating = int(validated_data.get('rating', 0))
+            if rating < 0:
+                rating = 0
+            elif rating > 5:
+                rating = 5
+            validated_data['rating'] = rating
+        return super(RatingSerializer, self).create(validated_data)

@@ -7,8 +7,8 @@ from .models import Rating
 
 class RatingAdmin(admin.ModelAdmin):
     ordering = ['id', 'rating']
-    # list_display = ['rating', 'comment', 'recipe', 'user']
-    # list_filter = ['recipe', 'author']
+    list_display = ['rating', 'comment', 'recipe', 'author']
+    list_filter = ['recipe', 'author']
     search_fields = ['rating', 'comment', ]
 
 
