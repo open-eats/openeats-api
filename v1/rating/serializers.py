@@ -10,6 +10,7 @@ from .models import Rating
 class RatingSerializer(serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     recipe = RecipeSlug()
+    user_id = serializers.ReadOnlyField(source='author.id')
     username = serializers.ReadOnlyField(source='author.username')
 
     class Meta:
@@ -19,6 +20,7 @@ class RatingSerializer(serializers.ModelSerializer):
             'rating',
             'comment',
             'recipe',
+            'user_id',
             'username',
             'author'
         ]
