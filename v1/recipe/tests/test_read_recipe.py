@@ -33,7 +33,7 @@ class RecipeSerializerTests(TestCase):
     def test_list_view(self):
         """Try and read the view of a recipe"""
         view = views.RecipeViewSet.as_view({'get': 'list'})
-        request = self.factory.get('/api/v1/recipe/recipes/tasty-chili?course=entry&cuisine=american&rating=3')
+        request = self.factory.get('/api/v1/recipe/recipes/tasty-chili?course=entry&cuisine=american')
         response = view(request)
 
         self.assertEqual(len(response.data.get('results')), 31)
@@ -55,7 +55,7 @@ class RecipeSerializerTests(TestCase):
                 self.assertTrue(r.get('slug', False))
                 self.assertTrue(r.get('title', False))
                 self.assertTrue(r.get('pub_date', False))
-                self.assertTrue(r.get('rating', False))
+                # self.assertTrue(r.get('rating', False))
                 self.assertTrue(r.get('info', False))
 
         get_mini_browse(2)

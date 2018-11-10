@@ -12,4 +12,5 @@ urlpatterns = [
     path('news/', include('v1.news.urls')),
     path('menu/', include('v1.menu.urls')),
     path('recipe/', include('v1.recipe.urls')),
+    path('rating/', include('v1.rating.urls')),
 ]

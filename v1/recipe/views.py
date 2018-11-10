@@ -6,14 +6,15 @@ import tempfile
 import requests
 import random
 from django.core import files
-from django.db.models import Count
+from django.db.models import Avg
+
 from rest_framework import permissions, viewsets, filters
 from rest_framework.response import Response
+from v1.rating.average_rating import convert_rating_to_int
 
 from . import serializers
 from .models import Recipe
 from v1.recipe_groups.models import Cuisine, Course
-from v1.common.recipe_search import get_search_results
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -45,10 +46,18 @@ class RecipeViewSet(viewsets.ModelViewSet):
             filter_set['course__in'] = Course.objects.filter(
                 slug__in=self.request.query_params.get('course__slug').split(',')
             )
-        if 'rating' in self.request.query_params:
-            filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
 
-        return query.filter(**filter_set)
+        query = query.filter(**filter_set)
+        if 'rating' not in self.request.query_params:
+            return query
+
+        # TODO: this many not be very efficient on huge query sets.
+        # I don't think I will ever get to the point of this mattering
+        query = query.annotate(rating_avg=Avg('rating__rating'))
+        return [
+            recipe for recipe in query
+            if str(convert_rating_to_int(recipe.rating_avg)) in self.request.query_params.get('rating').split(',')
+        ]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -111,42 +120,3 @@ class MiniBrowseViewSet(viewsets.mixins.ListModelMixin,
         self.queryset = Recipe.objects.filter(id__in=rand_ids)
 
         return super(MiniBrowseViewSet, self).list(request, *args, **kwargs)
-
-
-class RatingViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = serializers.RatingSerializer
-
-    def get_queryset(self):
-        query = Recipe.objects
-        filter_set = {}
-
-        # If user is anonymous, restrict recipes to public.
-        if not self.request.user.is_authenticated:
-            filter_set['public'] = True
-
-        if 'cuisine' in self.request.query_params:
-            try:
-                filter_set['cuisine__in'] = Cuisine.objects.filter(
-                    slug__in=self.request.query_params.get('cuisine').split(',')
-                )
-            except:
-                return []
-
-        if 'course' in self.request.query_params:
-            try:
-                filter_set['course__in'] = Course.objects.filter(
-                    slug__in=self.request.query_params.get('course').split(',')
-                )
-            except:
-                return []
-
-        if 'search' in self.request.query_params:
-            query = get_search_results(
-                ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
-                query,
-                self.request.query_params.get('search')
-            ).distinct()
-
-        query = query.filter(**filter_set)
-
-        return query.values('rating').annotate(total=Count('id', distinct=True)).order_by('-rating')

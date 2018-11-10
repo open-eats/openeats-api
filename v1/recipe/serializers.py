@@ -12,6 +12,7 @@ from v1.ingredient.serializers import IngredientGroupSerializer
 from v1.recipe_groups.serializers import TagSerializer
 from v1.ingredient.models import IngredientGroup, Ingredient
 from v1.recipe.mixins import FieldLimiter
+from v1.rating.average_rating import average_rating
 
 
 class CustomImageField(ImageField):
@@ -36,6 +37,25 @@ class CustomImageField(ImageField):
         return super(ImageField, self).to_representation(value)
 
 
+class RecipeSlug(serializers.Serializer):
+    def to_representation(self, value):
+        try:
+            return value.slug
+        except:
+            return super(RecipeSlug, self).to_representation(value)
+
+    def to_internal_value(self, data):
+        try:
+            return Recipe.objects.get(slug=data)
+        except:
+            return super(RecipeSlug, self).to_internal_value(data)
+
+
+class AverageRating(serializers.ReadOnlyField):
+    def to_representation(self, value):
+        return average_rating(value)
+
+
 class SubRecipeSerializer(serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     slug = serializers.ReadOnlyField(source='child_recipe.slug')
@@ -56,6 +76,7 @@ class MiniBrowseSerializer(FieldLimiter, serializers.ModelSerializer):
     """ Used to get random recipes and limit the return data. """
     photo_thumbnail = CustomImageField(required=False)
     pub_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+    rating = AverageRating(source='id')
 
     class Meta:
         model = Recipe
@@ -76,6 +97,7 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
     photo_thumbnail = CustomImageField(required=False)
     ingredient_groups = IngredientGroupSerializer(many=True)
     tags = TagSerializer(many=True, required=False)
+    rating = AverageRating(source='id')
     subrecipes = SerializerMethodField()
     pub_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     update_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
@@ -105,14 +127,6 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         subrecipe_data = None
         if 'request' in self.context:
             subrecipe_data = self.context['request'].data.get('subrecipes')
-
-        if 'rating' in validated_data:
-            rating = int(validated_data.get('rating', 0))
-            if rating < 0:
-                rating = 0
-            elif rating > 5:
-                rating = 5
-            validated_data['rating'] = rating
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -179,14 +193,6 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         if 'request' in self.context:
             subrecipe_data = self.context['request'].data.get('subrecipes')
 
-        if 'rating' in validated_data:
-            rating = int(validated_data.get('rating', 0))
-            if rating < 0:
-                rating = 0
-            elif rating > 5:
-                rating = 5
-            validated_data['rating'] = rating
-
         # Create the recipe.
         # Use the log-in user as the author.
         recipe = Recipe.objects.create(
@@ -223,12 +229,3 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
                         obj.save()
 
         return recipe
-
-
-class RatingSerializer(serializers.ModelSerializer):
-    """ Standard `rest_framework` ModelSerializer """
-    total = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = Recipe
-        fields = ('rating', 'total')
