@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 from django.conf.urls import url, include
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from . import views
@@ -12,4 +13,5 @@ router.register(r'rating', views.RatingViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),
+    path('rating-count/', views.RatingCountViewSet.as_view(), name='rating-count'),
 ]

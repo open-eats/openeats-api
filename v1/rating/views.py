@@ -1,17 +1,20 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+from django.db.models import Avg
 from rest_framework import viewsets
-from django.db.models import Count
+from rest_framework.views import APIView
+
+from rest_framework.response import Response
 
 from .models import Rating
 from .serializers import RatingSerializer
 from .permissions import IsOwnerOrReadOnly
 
-from . import serializers
 from .models import Recipe
 from v1.recipe_groups.models import Cuisine, Course
 from v1.common.recipe_search import get_search_results
+from v1.rating.average_rating import convert_rating_to_int
 
 
 class RatingViewSet(viewsets.ModelViewSet):
@@ -25,10 +28,8 @@ class RatingViewSet(viewsets.ModelViewSet):
     filter_fields = ('recipe', 'recipe__slug', 'author', 'comment', 'rating')
 
 
-class BrowseRatingViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = serializers.RatingSerializer
-
-    def get_queryset(self):
+class RatingCountViewSet(APIView):
+    def get(self, request, *args, **kwargs):
         query = Recipe.objects
         filter_set = {}
 
@@ -59,6 +60,20 @@ class BrowseRatingViewSet(viewsets.ReadOnlyModelViewSet):
                 self.request.query_params.get('search')
             ).distinct()
 
+        results = {
+            5: 0,
+            4: 0,
+            3: 0,
+            2: 0,
+            1: 0,
+            0: 0,
+        }
         query = query.filter(**filter_set)
+        # TODO: this many not be very efficient on huge query sets.
+        # I don't think I will ever get to the point of this mattering
+        for x in query.annotate(rating_avg=Avg('rating__rating')):
+            results[convert_rating_to_int(x.rating_avg)] += 1
 
-        return query.values('rating').annotate(total=Count('id', distinct=True)).order_by('-rating')
+        return Response({
+            'results': [{"rating": k, "total": v} for k, v in results.items()]
+        })

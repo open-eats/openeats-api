@@ -6,8 +6,11 @@ import tempfile
 import requests
 import random
 from django.core import files
+from django.db.models import Avg
+
 from rest_framework import permissions, viewsets, filters
 from rest_framework.response import Response
+from v1.rating.average_rating import convert_rating_to_int
 
 from . import serializers
 from .models import Recipe
@@ -43,10 +46,18 @@ class RecipeViewSet(viewsets.ModelViewSet):
             filter_set['course__in'] = Course.objects.filter(
                 slug__in=self.request.query_params.get('course__slug').split(',')
             )
-        if 'rating' in self.request.query_params:
-            filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
 
-        return query.filter(**filter_set)
+        query = query.filter(**filter_set)
+        if 'rating' not in self.request.query_params:
+            return query
+
+        # TODO: this many not be very efficient on huge query sets.
+        # I don't think I will ever get to the point of this mattering
+        query = query.annotate(rating_avg=Avg('rating__rating'))
+        return [
+            recipe for recipe in query
+            if str(convert_rating_to_int(recipe.rating_avg)) in self.request.query_params.get('rating').split(',')
+        ]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

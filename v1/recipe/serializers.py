@@ -53,7 +53,7 @@ class RecipeSlug(serializers.Serializer):
 
 class AverageRating(serializers.ReadOnlyField):
     def to_representation(self, value):
-        return int(average_rating(value))
+        return average_rating(value)
 
 
 class SubRecipeSerializer(serializers.ModelSerializer):
@@ -229,12 +229,3 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
                         obj.save()
 
         return recipe
-
-
-class RatingSerializer(serializers.ModelSerializer):
-    """ Standard `rest_framework` ModelSerializer """
-    total = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = Recipe
-        fields = ('rating', 'total')
