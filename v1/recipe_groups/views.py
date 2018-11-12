@@ -4,12 +4,14 @@
 from django.db.models import Count
 from rest_framework import permissions
 from rest_framework import viewsets
+from django.db.models import Avg
 
 from v1.recipe_groups.models import Cuisine, Course, Tag
 from v1.recipe.models import Recipe
 from v1.recipe_groups import serializers
 from v1.common.permissions import IsOwnerOrReadOnly
 from v1.common.recipe_search import get_search_results
+from v1.rating.average_rating import convert_rating_to_int
 
 
 class CuisineViewSet(viewsets.ModelViewSet):
@@ -54,9 +56,6 @@ class CuisineCountViewSet(viewsets.ModelViewSet):
             except:
                 return []
 
-        if 'rating' in self.request.query_params:
-            filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
-
         if 'search' in self.request.query_params:
             query = get_search_results(
                 ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
@@ -65,6 +64,14 @@ class CuisineCountViewSet(viewsets.ModelViewSet):
             ).distinct()
 
         query = query.filter(**filter_set)
+        if 'rating' in self.request.query_params:
+            # TODO: this many not be very efficient on huge query sets.
+            # I don't think I will ever get to the point of this mattering
+            query = query.annotate(rating_avg=Avg('rating__rating'))
+            query = [
+                recipe.id for recipe in query
+                if str(convert_rating_to_int(recipe.rating_avg)) in self.request.query_params.get('rating').split(',')
+            ]
 
         return Cuisine.objects.filter(recipe__in=query).annotate(total=Count('recipe', distinct=True))
 
@@ -111,9 +118,6 @@ class CourseCountViewSet(viewsets.ModelViewSet):
             except:
                 return []
 
-        if 'rating' in self.request.query_params:
-            filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
-
         if 'search' in self.request.query_params:
             query = get_search_results(
                 ['title', 'ingredient_groups__ingredients__title', 'tags__title'],
@@ -122,6 +126,14 @@ class CourseCountViewSet(viewsets.ModelViewSet):
             ).distinct()
 
         query = query.filter(**filter_set)
+        if 'rating' in self.request.query_params:
+            # TODO: this many not be very efficient on huge query sets.
+            # I don't think I will ever get to the point of this mattering
+            query = query.annotate(rating_avg=Avg('rating__rating'))
+            query = [
+                recipe.id for recipe in query
+                if str(convert_rating_to_int(recipe.rating_avg)) in self.request.query_params.get('rating').split(',')
+            ]
 
         return Course.objects.filter(recipe__in=query).annotate(total=Count('recipe', distinct=True))
 
