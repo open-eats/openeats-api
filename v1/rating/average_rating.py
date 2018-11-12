@@ -6,9 +6,12 @@ from .models import Rating
 
 
 def convert_rating_to_int(rating):
+    if not rating:
+        return 0
+    rating = int(rating)
     rating = 5 if rating > 5 else rating
     rating = 0 if rating < 0 else rating
-    return int(rating)
+    return rating
 
 
 def average_rating(recipe_id):
@@ -17,4 +20,6 @@ def average_rating(recipe_id):
     ratings = Rating.objects.filter(recipe_id=recipe_id)
     if len(ratings) < 1:
         return 0
-    return convert_rating_to_int(reduce((lambda x, y: x + y), [r.rating for r in ratings]) / len(ratings))
+    return convert_rating_to_int(
+        reduce((lambda x, y: x + y), [r.rating for r in ratings]) / len(ratings)
+    )

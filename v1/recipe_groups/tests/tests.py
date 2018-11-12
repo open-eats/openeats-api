@@ -62,7 +62,7 @@ class RecipeGroupsTests(TestCase):
         request = self.factory.get('/api/v1/recipe_groups/cuisine-count/?course=entry&rating=0')
         response = view(request)
 
-        self.assertEqual(response.data.get('count'), 0)
+        self.assertEqual(response.data.get('count'), 1)
 
     def test_cuisine_with_non_existent_course(self):
         view = views.CuisineCountViewSet.as_view({'get': 'list'})
@@ -89,7 +89,7 @@ class RecipeGroupsTests(TestCase):
         request = self.factory.get('/api/v1/recipe_groups/course-count/?cuisine=american&rating=0')
         response = view(request)
 
-        self.assertEqual(response.data.get('count'), 0)
+        self.assertEqual(response.data.get('count'), 1)
 
     def test_course_with_non_existent_cuisine(self):
         view = views.CourseCountViewSet.as_view({'get': 'list'})
