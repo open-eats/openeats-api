@@ -7,9 +7,9 @@ from rest_framework.settings import api_settings
 from rest_framework.fields import SerializerMethodField
 
 from v1.recipe.models import Recipe, SubRecipe
-from v1.recipe_groups.models import Tag
+from v1.recipe_groups.models import Tag, Course, Cuisine
 from v1.ingredient.serializers import IngredientGroupSerializer
-from v1.recipe_groups.serializers import TagSerializer
+from v1.recipe_groups.serializers import TagSerializer, CourseSerializer, CuisineSerializer
 from v1.ingredient.models import IngredientGroup, Ingredient
 from v1.recipe.mixins import FieldLimiter
 from v1.rating.average_rating import average_rating
@@ -102,6 +102,8 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
     pub_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     update_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     username = serializers.ReadOnlyField(source='author.username')
+    course = CourseSerializer()
+    cuisine = CuisineSerializer()
 
     def get_subrecipes(self, obj):
         try:
@@ -123,6 +125,33 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         # Pop tags, and ingredients
         ingredient_data = validated_data.pop('ingredient_groups', None)
         tag_data = validated_data.pop('tags', None)
+        course = validated_data.pop('course', None)
+        cuisine = validated_data.pop('cuisine', None)
+        print(course)
+        print(cuisine)
+
+        # If the course is a string.
+        # Create a new course and replace it with a string
+        if course.get('id'):
+            validated_data['course'] = Course.objects.get(id=course.get('id'))
+        elif course.get('title'):
+            validated_data['course'] = Course.objects.create(
+                author=self.context['request'].user,
+                title=course.get('title')
+            ).save()
+        #TODO: on update check if there are any of the old course left.
+        # if not delete them
+
+        # If the cuisine is a string.
+        # Create a new cuisine and replace it with a string
+        if cuisine.get('id'):
+            validated_data['cuisine'] = Cuisine.objects.get(id=course.get('id'))
+        elif cuisine.get('title'):
+            validated_data['cuisine'] = Cuisine.objects.create(
+                author=self.context['request'].user,
+                title=course.get('title')
+            ).save()
+
         # ManytoMany fields in django rest don't work very well, so we are getting the data directly fron teh context
         subrecipe_data = None
         if 'request' in self.context:
@@ -188,6 +217,32 @@ class RecipeSerializer(FieldLimiter, serializers.ModelSerializer):
         # Pop tags, and ingredients
         ingredient_data = validated_data.pop('ingredient_groups', None)
         tag_data = validated_data.pop('tags', None)
+        course = validated_data.pop('course', None)
+        cuisine = validated_data.pop('cuisine', None)
+        validated_data.pop('author')
+
+        # If the course is a string.
+        # Create a new course and replace it with a string
+        if course.get('id'):
+            validated_data['course'] = Course.objects.get(id=course.get('id'))
+        elif course.get('title'):
+            validated_data['course'] = Course.objects.create(
+                author=self.context['request'].user,
+                title=course.get('title')
+            ).save()
+        #TODO: on update check if there are any of the old course left.
+        # if not delete them
+
+        # If the cuisine is a string.
+        # Create a new cuisine and replace it with a string
+        if cuisine.get('id'):
+            validated_data['cuisine'] = Cuisine.objects.get(id=course.get('id'))
+        elif cuisine.get('title'):
+            validated_data['cuisine'] = Cuisine.objects.create(
+                author=self.context['request'].user,
+                title=course.get('title')
+            ).save()
+
         # ManytoMany fields in django rest don't work very well, so we are getting the data directly fron teh context
         subrecipe_data = None
         if 'request' in self.context:

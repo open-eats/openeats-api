@@ -5,7 +5,37 @@ from rest_framework import serializers
 from .models import Cuisine, Course, Tag
 
 
+class CourseSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    author = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
+    class Meta:
+        model = Course
+        fields = (
+            'id',
+            'author',
+            'title',
+        )
+
+
 class CuisineSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    author = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
+    class Meta:
+        model = Cuisine
+        fields = (
+            'id',
+            'author',
+            'title',
+        )
+
+
+class AggCuisineSerializer(serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     total = serializers.IntegerField(read_only=True)
 
@@ -14,7 +44,7 @@ class CuisineSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CourseSerializer(serializers.ModelSerializer):
+class AggCourseSerializer(serializers.ModelSerializer):
     """ Standard `rest_framework` ModelSerializer """
     total = serializers.IntegerField(read_only=True)
 
