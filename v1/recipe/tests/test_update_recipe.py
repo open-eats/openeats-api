@@ -130,7 +130,7 @@ class RecipeSerializerTests(TestCase):
                 }
             ],
             "directions": '',
-            "tags": ['hi', 'hello'],
+            "tags": [{'title': 'hi'}, {'title': 'hello'}],
             "title": "Recipe name",
             "info": "Recipe info",
             "source": "google.com",
@@ -255,7 +255,7 @@ class RecipeSerializerTests(TestCase):
                 }
             ],
             "directions": '',
-            "tags": ['hi', 'hello'],
+            "tags": [{'title': 'hi'}, {'title': 'hello'}],
             "title": "Recipe name",
             "info": "Recipe info",
             "source": "google.com",
