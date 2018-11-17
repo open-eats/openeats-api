@@ -138,8 +138,8 @@ class RecipeSerializerTests(TestCase):
             "cook_time": 60,
             "servings": 8,
             "rating": 0,
-            "cuisine": 1,
-            "course": 2
+            "cuisine": {"id": 1},
+            "course": {"id": 2}
         }
         request = self.factory.patch('/api/v1/recipe/recipes/tasty-chili', data=data)
         request.user = self.staff
@@ -263,8 +263,8 @@ class RecipeSerializerTests(TestCase):
             "cook_time": 60,
             "servings": 8,
             "rating": 0,
-            "cuisine": 1,
-            "course": 2
+            "cuisine": {"id": 1},
+            "course": {"id": 2}
         }
         request = self.factory.put('/api/v1/recipe/recipes/tasty-chili', data=data)
         request.user = self.staff
