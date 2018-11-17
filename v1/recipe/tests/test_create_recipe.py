@@ -142,7 +142,7 @@ class RecipeSerializerTests(TestCase):
             "cuisine": {"id": 1},
             "course": {"id": 2}
         }
-        request = self.factory.post('/api/v1/recipe/recipes/', data=data)
+        request = self.factory.post('/api/v1/recipe/recipes/', data=data, format='json')
         request.user = self.staff
 
         root_path = os.path.join(settings.PROJECT_PATH, 'v1', 'fixtures', 'test', 'food.jpg')

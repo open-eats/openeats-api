@@ -141,7 +141,7 @@ class RecipeSerializerTests(TestCase):
             "cuisine": {"id": 1},
             "course": {"id": 2}
         }
-        request = self.factory.patch('/api/v1/recipe/recipes/tasty-chili', data=data)
+        request = self.factory.patch('/api/v1/recipe/recipes/tasty-chili', data=data, format='json')
         request.user = self.staff
         response = view(request, slug='tasty-chili')
 
@@ -266,7 +266,7 @@ class RecipeSerializerTests(TestCase):
             "cuisine": {"id": 1},
             "course": {"id": 2}
         }
-        request = self.factory.put('/api/v1/recipe/recipes/tasty-chili', data=data)
+        request = self.factory.put('/api/v1/recipe/recipes/tasty-chili', data=data, format='json')
         request.user = self.staff
         response = view(request, slug='tasty-chili')
 
