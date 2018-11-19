@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import uuid
-import tempfile
-import requests
 import random
-from django.core import files
 from django.db.models import Avg
 
 from rest_framework import permissions, viewsets, filters
@@ -14,6 +10,7 @@ from v1.rating.average_rating import convert_rating_to_int
 
 from . import serializers
 from .models import Recipe
+from .save_recipe import SaveRecipe
 from v1.recipe_groups.models import Cuisine, Course
 
 
@@ -60,34 +57,19 @@ class RecipeViewSet(viewsets.ModelViewSet):
         ]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        return Response(
+            serializers.RecipeSerializer(
+                SaveRecipe(request.data, self.request.user).create()
+            ).data
+        )
 
-        url = request.data.get('image')
-        if url:
-            # Steam the image from the url
-            request_image = requests.get(url, stream=True)
-
-            # Create a temporary file
-            lf = tempfile.NamedTemporaryFile()
-
-            # Read the streamed image in sections
-            for block in request_image.iter_content(1024 * 8):
-
-                # If no more file then stop
-                if not block:
-                    break
-
-                # Write image block to temporary file
-                lf.write(block)
-
-            # Get the recently created recipe and add the image
-            recipe = Recipe.objects.get(pk=serializer.data['id'])
-            recipe.photo.save(str(uuid.uuid4()), files.File(lf))
-            recipe.save()
-
-        return Response(serializer.data)
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        return Response(
+            serializers.RecipeSerializer(
+                SaveRecipe(request.data, self.request.user, partial=partial).update(self.get_object())
+            ).data
+        )
 
 
 class MiniBrowseViewSet(viewsets.mixins.ListModelMixin,

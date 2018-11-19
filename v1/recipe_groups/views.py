@@ -35,7 +35,7 @@ class CuisineCountViewSet(viewsets.ModelViewSet):
 
     Uses `title` as the PK for any lookups.
     """
-    serializer_class = serializers.CuisineSerializer
+    serializer_class = serializers.AggCuisineSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly)
     lookup_field = 'slug'
@@ -97,7 +97,7 @@ class CourseCountViewSet(viewsets.ModelViewSet):
 
     Uses `title` as the PK for any lookups.
     """
-    serializer_class = serializers.CourseSerializer
+    serializer_class = serializers.AggCourseSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly)
     lookup_field = 'slug'

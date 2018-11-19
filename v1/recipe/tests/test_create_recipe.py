@@ -131,7 +131,7 @@ class RecipeSerializerTests(TestCase):
                 }
             ],
             "directions": '',
-            "tags": ['hi', 'hello'],
+            "tags": [{'title': 'hi'}, {'title': 'hello'}],
             "title": "Recipe name",
             "info": "Recipe info",
             "source": "google.com",
@@ -139,10 +139,10 @@ class RecipeSerializerTests(TestCase):
             "cook_time": 60,
             "servings": 8,
             "rating": 0,
-            "cuisine": 1,
-            "course": 2
+            "cuisine": {"id": 1},
+            "course": {"id": 2}
         }
-        request = self.factory.post('/api/v1/recipe/recipes/', data=data)
+        request = self.factory.post('/api/v1/recipe/recipes/', data=data, format='json')
         request.user = self.staff
 
         root_path = os.path.join(settings.PROJECT_PATH, 'v1', 'fixtures', 'test', 'food.jpg')

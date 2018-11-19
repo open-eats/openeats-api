@@ -130,7 +130,7 @@ class RecipeSerializerTests(TestCase):
                 }
             ],
             "directions": '',
-            "tags": ['hi', 'hello'],
+            "tags": [{'title': 'hi'}, {'title': 'hello'}],
             "title": "Recipe name",
             "info": "Recipe info",
             "source": "google.com",
@@ -138,10 +138,10 @@ class RecipeSerializerTests(TestCase):
             "cook_time": 60,
             "servings": 8,
             "rating": 0,
-            "cuisine": 1,
-            "course": 2
+            "cuisine": {"id": 1},
+            "course": {"id": 2}
         }
-        request = self.factory.patch('/api/v1/recipe/recipes/tasty-chili', data=data)
+        request = self.factory.patch('/api/v1/recipe/recipes/tasty-chili', data=data, format='json')
         request.user = self.staff
         response = view(request, slug='tasty-chili')
 
@@ -255,7 +255,7 @@ class RecipeSerializerTests(TestCase):
                 }
             ],
             "directions": '',
-            "tags": ['hi', 'hello'],
+            "tags": [{'title': 'hi'}, {'title': 'hello'}],
             "title": "Recipe name",
             "info": "Recipe info",
             "source": "google.com",
@@ -263,10 +263,10 @@ class RecipeSerializerTests(TestCase):
             "cook_time": 60,
             "servings": 8,
             "rating": 0,
-            "cuisine": 1,
-            "course": 2
+            "cuisine": {"id": 1},
+            "course": {"id": 2}
         }
-        request = self.factory.put('/api/v1/recipe/recipes/tasty-chili', data=data)
+        request = self.factory.put('/api/v1/recipe/recipes/tasty-chili', data=data, format='json')
         request.user = self.staff
         response = view(request, slug='tasty-chili')
 
