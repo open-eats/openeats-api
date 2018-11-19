@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import uuid
-import tempfile
-import requests
 import random
-from django.core import files
 from django.db.models import Avg
 
 from rest_framework import permissions, viewsets, filters
@@ -63,14 +59,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         return Response(
             serializers.RecipeSerializer(
-                SaveRecipe(request.data, self.request.user).get_recipe()
+                SaveRecipe(request.data, self.request.user).create()
             ).data
         )
 
     def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
         return Response(
             serializers.RecipeSerializer(
-                SaveRecipe(request.data, self.request.user, self.get_object()).get_recipe()
+                SaveRecipe(request.data, self.request.user, partial=partial).update(self.get_object())
             ).data
         )
 
