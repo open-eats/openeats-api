@@ -185,9 +185,10 @@ class SaveRecipe(Validators):
         self._save_ingredient_data(instance)
         self._save_subrecipe_data(instance)
         self._save_tags(instance)
+        instance.save()
+
         self._delete_recipe_groups()
 
-        instance.save()
         return instance
 
     def create(self):
