@@ -19,8 +19,9 @@ class Validators(object):
             return None if item else "This item is required."
         return None
 
-    @staticmethod
-    def is_digit(item):
+    def is_digit(self, item):
+        if self.partial and item is None:
+            return None
         try:
             int(item)
         except:
