@@ -20,7 +20,8 @@
         "model": "ingredient.ingredient",
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1,
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "dash",
             "title": "black pepper"
         }
@@ -30,7 +31,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 4, 
+            "numerator": 4,
+            "denominator": 1,
             "measurement": "tablespoons", 
             "title": "chili powder"
         }
@@ -40,7 +42,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "tablespoon", 
             "title": "cumin"
         }
@@ -50,7 +53,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "can", 
             "title": "dark kidney beans"
         }
@@ -60,7 +64,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 2, 
+            "numerator": 2,
+            "denominator": 1,
             "measurement": "cans", 
             "title": "diced tomatos"
         }
@@ -70,7 +75,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "whole", 
             "title": "green bell pepper"
         }
@@ -80,7 +86,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 2,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "pound", 
             "title": "ground pork"
         }
@@ -90,7 +97,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 2,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "pound", 
             "title": "ground sirloin"
         }
@@ -100,7 +108,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 2,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "dash", 
             "title": "kosher salt"
         }
@@ -110,7 +119,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "can", 
             "title": "light kidney beans"
         }
@@ -120,7 +130,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "whole", 
             "title": "serrano pepper "
         }
@@ -130,7 +141,8 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
+            "numerator": 1,
+            "denominator": 1,
             "measurement": "quart", 
             "title": "tomato juice"
         }
@@ -140,8 +152,9 @@
         "model": "ingredient.ingredient", 
         "fields": {
             "ingredient_group": 1,
-            "quantity": 1, 
-            "measurement": "whole", 
+            "numerator": 1,
+            "denominator": 1,
+            "measurement": "whole",
             "title": "white onion"
         }
     }
