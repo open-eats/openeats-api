@@ -7,7 +7,7 @@ from v1.ingredient.models import Ingredient, IngredientGroup
 
 class IngredientAdmin(admin.ModelAdmin):
     ordering = ['title', 'ingredient_group']
-    list_display = ['title', 'quantity', 'measurement']
+    list_display = ['title', 'numerator', 'denominator', 'measurement']
     list_filter = ['ingredient_group__title']
     search_fields = ['title', 'ingredient_group__title', ]
 
@@ -17,6 +17,7 @@ class IngredientGroupAdmin(admin.ModelAdmin):
     list_display = ['recipe', 'title']
     list_filter = ['recipe__title']
     search_fields = ['title', 'recipe__title', ]
+
 
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(IngredientGroup, IngredientGroupAdmin)
