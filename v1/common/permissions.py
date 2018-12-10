@@ -19,15 +19,6 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         # Write permissions are only allowed to the owner of the recipe.
         return obj.recipe.author == request.user
 
-    def has_permission(self, request, view):
-        # Read permissions are allowed to any request,
-        # so we'll always allow GET, HEAD or OPTIONS requests.
-        if request.method in permissions.SAFE_METHODS:
-            return True
-
-        # Write permissions are only allowed to admin users.
-        return request.user and request.user.is_staff
-
 
 class IsAdminOrReadOnly(permissions.BasePermission):
     """
