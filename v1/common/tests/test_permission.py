@@ -44,7 +44,7 @@ class PermissionTest(TestCase):
         )
         request = self.factory.post('/admin')
         request.user = AnonymousUser()
-        self.assertFalse(
+        self.assertTrue(
             IsOwnerOrReadOnly().has_permission(request, None)
         )
 
