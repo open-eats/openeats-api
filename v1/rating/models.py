@@ -26,5 +26,5 @@ class Rating(models.Model):
     class Meta:
         ordering = ['id']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s - %s' % (self.rating, self.comment)
