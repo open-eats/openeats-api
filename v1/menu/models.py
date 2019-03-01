@@ -21,5 +21,5 @@ class MenuItem(models.Model):
     class Meta:
         ordering = ['start_date', 'id']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.recipe.title
