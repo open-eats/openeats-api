@@ -25,6 +25,7 @@ class News(models.Model):
 
     class Meta:
         ordering = ('pub_date',)
+        verbose_name_plural = "news"
 
     def __unicode__(self):
         return '%s' % self.title
