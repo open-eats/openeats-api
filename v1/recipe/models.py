@@ -64,7 +64,8 @@ class Recipe(models.Model):
 
 
 class SubRecipe(models.Model):
-    quantity = models.IntegerField(_('quantity'), blank=True, null=True)
+    numerator = models.FloatField(_('numerator'), default=0)
+    denominator = models.FloatField(_('denominator'), default=1)
     measurement = models.TextField(_('measurement'), blank=True, null=True)
     child_recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE, related_name='child_recipe', null=True)
     parent_recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE, related_name='parent_recipe', null=True)
