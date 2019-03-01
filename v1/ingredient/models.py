@@ -21,7 +21,7 @@ class IngredientGroup(models.Model):
         ordering = ['id']
         unique_together = ('title', 'recipe')
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
 
@@ -45,5 +45,5 @@ class Ingredient(models.Model):
     class Meta:
         ordering = ['id']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title

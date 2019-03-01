@@ -127,7 +127,8 @@ class SaveRecipe(Validators):
                     child_recipe = Recipe.objects.filter(title=subrecipe.get('title', '')).first()
                     if recipe:
                         obj = SubRecipe.objects.create(
-                            quantity=subrecipe.get('quantity', ''),
+                            numerator=subrecipe.get('numerator', 0),
+                            denominator=subrecipe.get('denominator', 1),
                             measurement=subrecipe.get('measurement', ''),
                             child_recipe=child_recipe,
                             parent_recipe=recipe

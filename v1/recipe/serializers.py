@@ -64,7 +64,8 @@ class SubRecipeSerializer(serializers.ModelSerializer):
         fields = (
             'child_recipe_id',
             'slug',
-            'quantity',
+            'numerator',
+            'denominator',
             'measurement',
             'title',
         )

@@ -22,7 +22,7 @@ class Cuisine(models.Model):
     class Meta:
         ordering = ['title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -41,7 +41,7 @@ class Course(models.Model):
     class Meta:
         ordering = ['title']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
 
@@ -59,7 +59,7 @@ class Tag(models.Model):
     class Meta:
         ordering = ['title']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
     def recipe_count(self):
