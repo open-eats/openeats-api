@@ -21,7 +21,7 @@ class MenuItemViewSet(viewsets.ModelViewSet):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     permission_classes = (IsMenuItemOwner,)
-    filter_fields = ('recipe', 'start_date', 'end_date', 'complete')
+    filter_fields = ('recipe', 'start_date', 'complete_date', 'complete')
 
     def get_queryset(self):
         user = self.request.user
@@ -37,7 +37,7 @@ class MenuStatsViewSet(views.APIView):
         return Response(
             Recipe.objects.annotate(
                 num_menuitems=Count('menu_recipe'),
-                last_made=Max('menu_recipe__end_date')
+                last_made=Max('menu_recipe__complete_date')
             ).filter(
                 num_menuitems__gte=1,
                 menu_recipe__complete=True
