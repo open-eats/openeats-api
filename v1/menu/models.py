@@ -13,10 +13,9 @@ class MenuItem(models.Model):
     """
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='menu_recipe')
-    all_day = models.BooleanField(default=False, blank=True)
     complete = models.BooleanField(default=False, blank=True)
     start_date = models.DateTimeField(null=True, blank=True)
-    end_date = models.DateTimeField(null=True, blank=True)
+    complete_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ['start_date', 'id']
