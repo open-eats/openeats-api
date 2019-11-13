@@ -36,6 +36,7 @@ DATABASES = {
     }
 }
 if 'django.db.backends.mysql' in DATABASES['default']['ENGINE']:
+    DATABASES['default'].setdefault('OPTIONS', {})
     DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
