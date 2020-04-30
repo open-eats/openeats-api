@@ -41,13 +41,15 @@ class GroceryItem(models.Model):
     title = The name of the GroceryItem.
     completed = Whether or not the GroceryItem has been purchased or
                 added to the users shopping cart in the supermarket.
+    order = The order of the item in the GroceryList.
     """
     list = models.ForeignKey(GroceryList, on_delete=models.CASCADE, related_name='items')
     title = models.CharField(_("title"), max_length=550)
     completed = models.BooleanField(_("completed"), default=False)
+    order = models.IntegerField(_("order"), default=0)
 
     class Meta:
-        ordering = ['pk']
+        ordering = ['list_id', 'order', 'pk']
 
     def __str__(self):
         return '%s' % self.title
