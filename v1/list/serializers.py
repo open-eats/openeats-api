@@ -10,7 +10,7 @@ class GroceryItemSerializer(serializers.ModelSerializer):
     """Generic Serializer for grocery items"""
     class Meta:
         model = GroceryItem
-        fields = ('id', 'list', 'title', 'completed')
+        fields = ('id', 'list', 'title', 'completed', 'order')
 
 
 class GroceryListSerializer(serializers.ModelSerializer):
@@ -44,4 +44,4 @@ class BulkGroceryItemSerializer(BulkSerializerMixin, serializers.ModelSerializer
     class Meta:
         model = GroceryItem
         list_serializer_class = BulkListSerializer
-        fields = ('id', 'list', 'title', 'completed')
+        fields = ('id', 'list', 'title', 'completed', 'order')
