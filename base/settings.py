@@ -24,20 +24,20 @@ SITE_ID = 1
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': os.environ.get('DATABASE_ENGINE', 'django.db.backends.mysql'),
         'NAME': os.environ.get('MYSQL_DATABASE', 'openeats'),
         'USER': os.environ.get('MYSQL_USER', 'root'),
         'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD', ''),
         'HOST': os.environ.get('MYSQL_HOST', 'db'),
         'PORT': os.environ.get('MYSQL_PORT', '3306'),
-        'OPTIONS': {
-            'charset': 'utf8mb4'
-        },
         'TEST': {
             'NAME': os.environ.get('MYSQL_TEST_DATABASE', 'test_openeats')
         }
     }
 }
+if 'django.db.backends.mysql' in DATABASES['default']['ENGINE']:
+    DATABASES['default'].setdefault('OPTIONS', {})
+    DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
