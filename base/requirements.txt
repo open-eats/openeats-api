@@ -1,5 +1,5 @@
 #Third party package requirements for OpenEats 2
-Django==2.1.7
+Django==2.2.13
 django-imagekit==4.0.1
 djangorestframework==3.9.1
 djangorestframework-bulk==0.2.1
