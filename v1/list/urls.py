@@ -8,8 +8,8 @@ from . import views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'lists', views.GroceryListViewSet, base_name='GroceryList')
-router.register(r'items', views.GroceryItemViewSet, base_name='GroceryItem')
+router.register(r'lists', views.GroceryListViewSet, basename='GroceryList')
+router.register(r'items', views.GroceryItemViewSet, basename='GroceryItem')
 
 urlpatterns = [
     path('', include(router.urls)),
