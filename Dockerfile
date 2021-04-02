@@ -1,4 +1,4 @@
-FROM python:3.6.5-alpine3.7
+FROM python:3.9.2-alpine3.13
 ENV PYTHONUNBUFFERED 1
 
 RUN apk update && apk upgrade && \
@@ -6,7 +6,7 @@ RUN apk update && apk upgrade && \
     gcc \
     mariadb \
     mariadb-dev \
-    py-mysqldb \
+    mariadb-connector-c \
     musl-dev \
     libjpeg-turbo-dev \
     zlib-dev
@@ -19,3 +19,7 @@ WORKDIR /code
 ADD base/requirements.txt /code/requirements.txt
 RUN pip install -r requirements.txt
 ADD . /code/
+VOLUME /code/static-files
+ENV API_PORT=8000
+EXPOSE 8000
+ENTRYPOINT ["/startup/prod-entrypoint.sh"]
