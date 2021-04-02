@@ -19,3 +19,7 @@ WORKDIR /code
 ADD base/requirements.txt /code/requirements.txt
 RUN pip install -r requirements.txt
 ADD . /code/
+VOLUME /code/static-files
+ENV API_PORT=8000
+EXPOSE 8000
+ENTRYPOINT ["/startup/prod-entrypoint.sh"]
