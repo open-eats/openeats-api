@@ -5,4 +5,4 @@
 /code/manage.py collectstatic --no-input
 
 # Start up gunicorn
-/code/base/gunicorn_start.sh
+exec /code/base/gunicorn_start.sh $@
