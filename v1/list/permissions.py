@@ -32,4 +32,4 @@ class IsItemOwner(permissions.BasePermission):
 
         # Write/Read permissions are only allowed to the owner of the list.
         return obj.list.author == request.user or \
-               obj.list.groceryshared.shared_to == request.user
+               obj.list.groceryshared_set.filter(shared_by=obj.list.author.pk, shared_to=request.user.pk).exists()
