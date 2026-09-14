@@ -4,11 +4,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/open-eats/openeats-api/badge.svg)](https://coveralls.io/github/open-eats/openeats-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ac4a42717db53286ee8f/maintainability)](https://codeclimate.com/github/open-eats/openeats-api/maintainability)
 
-This is the API that powers OpenEats. It uses Django/Django Rest Framework to power the API. The core responsibilities of the APi are:
+This is the API that powers OpenEats. It uses Django/Django Rest Framework to power the API. The core responsibilities of the API are:
 - OpenEats REST API
 - Django User management with Django REST token auth
 - Django Admin panel for creating new users and administration
-- Static Media Manangemtn (AKA Recipe Images)
+- Static Media Manangement (AKA Recipe Images)
 
 See [the homepage](https://github.com/open-eats/OpenEats) for more information about OpenEats!
 
