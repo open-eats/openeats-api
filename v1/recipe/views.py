@@ -50,11 +50,13 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         # TODO: this many not be very efficient on huge query sets.
         # I don't think I will ever get to the point of this mattering
-        query = query.annotate(rating_avg=Avg('rating__rating'))
-        return [
-            recipe for recipe in query
-            if str(convert_rating_to_int(recipe.rating_avg)) in self.request.query_params.get('rating').split(',')
+        wanted = self.request.query_params.get('rating').split(',')
+        ids = [
+            recipe.id for recipe in query.annotate(rating_avg=Avg('rating__rating'))
+            if str(convert_rating_to_int(recipe.rating_avg)) in wanted
         ]
+        # Return a queryset, not a list: searching and sorting need one.
+        return query.filter(id__in=ids)
 
     def create(self, request, *args, **kwargs):
         return Response(
